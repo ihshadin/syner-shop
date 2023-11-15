@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*=====================CSS VARIABLES =======================*/
+:root {
+  /*================= Colors ============*/
+  --primary-color: #ff914d;
+  --secondary-color: blue;
+  --primary-text: #FF914D;
+  --secondary-text: rgb(10, 10, 10);
+  --primary-border-color: gray;
+  --secondary-border-color: gray;
+  --primary-bg-color: #FF914D;
+  --secondary-bg-color: white;
+}
+
+.syner-primary {
+  color: var(--primary-color);
+}
+.syner-secondary {
+  color: var(--secondary-color);
+}
+.syner-primary-text {
+  color: var(--primary-text);
+}
+.syner-secondary-text {
+  color: var(--secondary-text);
+}
+.syner-primary-border {
+  border-color: var(--primary-border-color);
+}
+.syner-secondary-border {
+  border-color: var(--secondary-border-color);
+}
+.syner-primary-bg {
+  background-color: var(--primary-bg-color);
+}
+.syner-secondary-bg {
+  background-color: var(--secondary-bg-color);
+}
+
+
+/*==== container ====*/
+.syner-container {
+  width: 100%;
+  max-width: 1280px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
