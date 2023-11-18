@@ -11,7 +11,7 @@ import mainSlider from "@/data/mainSlider";
 
 const BannerSlider = () => {
     return (
-        <section className="main-slider">
+        <section className="main-slider rounded-xl overflow-hidden">
       <Swiper
         slidesPerView={1}
         loop

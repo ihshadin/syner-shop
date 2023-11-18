@@ -58,7 +58,7 @@ const NavBar = () => {
         className="items-center gap-9 md:gap-5"
         justify="end"
       >
-        <Language />
+        {/* <Language /> */}
         <NavWishlist />
         <NavCart />
 

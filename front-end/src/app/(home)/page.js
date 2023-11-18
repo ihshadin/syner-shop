@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import HeroSection from './HeroSection'
 
-export default function Home() {
+ const Home = () => {
   return (
-    <main >
+    <div>
       <HeroSection/>
-    </main>
+    </div>
   )
 }
+export default Home
