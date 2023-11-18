@@ -1,8 +1,8 @@
 [
   {
     "_id": "123456789",
-    "medicine_name": "Example Medicine",
-    "image": "https://al-dinpharmacy.com/wp-content/uploads/2020/12/h1-news01.png",
+    "medicine_name": "Aspirin",
+    "image": "https://i.ibb.co/7zSsMP6/product-image-1.jpg",
     "price": 19.99,
     "sellQuantity": 50,
     "available_quantity": 100,
@@ -13,7 +13,7 @@
     "feature_with_details": "Some feature details about the medicine.",
     "category": "Pain Relief",
     "allRatings": [5, 4, 4.5, 3.5],
-    "discount": 10,
+    "discount": 30,
     "pharmacist_email": "pharmacist@example.com",
     "order_quantity": 0
   }

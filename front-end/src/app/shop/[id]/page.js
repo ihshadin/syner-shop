@@ -5,6 +5,7 @@ import { Rating } from "@smastrom/react-rating";
 import HtmlParser from "react-html-parser";
 import "@smastrom/react-rating/style.css";
 import {
+  BiCartAdd,
   BiLogoFacebook,
   BiLogoGooglePlus,
   BiLogoInstagram,
@@ -14,8 +15,10 @@ import {
   BiLogoTwitter,
   BiSolidEnvelope,
 } from "react-icons/bi";
+import { HiMinus, HiOutlineChevronRight, HiPlus } from "react-icons/hi";
 
 import ReactImageMagnify from "react-image-magnify";
+import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 
 const SinglePage = () => {
   const [loading, setLoading] = useState(true);
@@ -72,7 +75,7 @@ const SinglePage = () => {
   };
 
   return (
-    <section className="syner-container">
+    <section className="syner-container border border-red-700">
       <div className="container mx-auto py-5 px-4 md:py-8 lg:pt-10 lg:px-2">
         <p className="inline-flex items-center gap-1 font-medium md:font-semibold tracking-wider text-black-2 lg:text-lg">
           <Link
@@ -81,20 +84,22 @@ const SinglePage = () => {
           >
             Home
           </Link>
-
+          <HiOutlineChevronRight />
           <Link
-            href="/"
+            href="/shop"
             className="hover:text-my-accent cursor-pointer transition-colors"
           >
-            Medicines
+            Shop
           </Link>
-          <span>Details</span>
+          <HiOutlineChevronRight />
+          <span>Details</span> <HiOutlineChevronRight />
+          <span>{medicine_name}</span>
         </p>
       </div>
       {/* product details */}
-      <div className="syner-secondary-bg rounded-md">
-        <div className="xl:flex gap-3">
-          <div className="xl:w-1/2 h-[500px]">
+      <div className="">
+        <div className="md:flex gap-5 ">
+          <div className="md:w-1/2">
             <ReactImageMagnify
               className="z-50"
               {...{
@@ -102,19 +107,23 @@ const SinglePage = () => {
                   alt: "medicine image",
                   isFluidWidth: true,
                   src: image,
+                  style: {
+                    width: "800px",
+                    height: "800px",
+                  },
                 },
                 largeImage: {
                   src: image,
-                  width: 1200,
-                  height: 1800,
+                  width: 800,
+                  height: 800,
                 },
               }}
             />
           </div>
-          <div className="xl:w-1/2 space-y-5 lg:space-y-7">
+          <div className="md:w-1/2 space-y-5 lg:space-y-7">
             <div className="space-y-1">
               {discount > 0 && (
-                <p className="bg-black rounded-md py-1 px-2 text-xs font-medium text-white w-fit">
+                <p className="z-10 rounded py-1 px-2 text-xs font-medium  syner-primary-bg syner-white w-[4.7rem]">
                   -{discount}% OFF
                 </p>
               )}
@@ -122,27 +131,32 @@ const SinglePage = () => {
                 {medicine_name}
               </h3>
             </div>
-            <Rating
-              style={{ maxWidth: 80 }}
-              value={rating}
-              readOnly
-              //   itemStyles={customStyles}
-            />
+            <div className="flex gap-x-2 items-center">
+              <Rating
+                style={{ maxWidth: 70 }}
+                value={rating}
+                readOnly
+                className="[&>*]:!fill-yellow-400 [&>*]:!stroke-yellow-400"
+              />
+              <span className="text-xs font-semibold px-2 py-0.5 rounded syner-primary-bg syner-white">
+                {rating}
+              </span>
+            </div>
             <p className="inline-flex gap-1">
               <span className="font-semibold lg:font-bold text-my-pink inline-flex items-center text-lg md:text-xl lg:text-2xl">
-                ৳{" "}
+                ${" "}
                 {discount > 0
                   ? (price - (price / 100) * discount)?.toFixed(2)
                   : price?.toFixed(2)}
               </span>
               {discount > 0 && (
                 <span className="font-medium inline-flex items-center text-base lg:text-xl text-gray-5 line-through">
-                  ৳ {price}
+                  $ {price}
                 </span>
               )}
             </p>
             <p className="font-medium text-black-2 tracking-wide text-sm lg:text-base">
-              Availability:{" "}
+              Availability :{" "}
               {available_quantity === sellQuantity ? (
                 <span className="text-red-500">Out of Stock</span>
               ) : (
@@ -152,35 +166,34 @@ const SinglePage = () => {
             <p className="text-gray-4 text-justify text-sm lg:text-base lg:leading-7 w-full">
               {medicine_summary}
             </p>
-            <div className="border border-gray-3 py-5 px-3 rounded-md font-semibold flex items-center justify-around">
-              <span className="text-base lg:text-lg tracking-wide">
+            <div className="border border-[#c2c2c2] py-4 px-3 rounded-md font-semibold flex items-center justify-between">
+              <span className="text-base lg:text-lg tracking-wide ">
                 Quantity:
               </span>
-              <div className="border border-gray-3 rounded-full w-fit py-3 px-5 flex items-center justify-between gap-5">
+              <div className="border border-[#c2c2c2] rounded-full py-2 px-4 flex items-center justify-between gap-5 ">
                 <button
                   type="button"
                   disabled={quantity <= 1}
                   onClick={() => setQuantity(quantity - 1)}
-                  className="cursor-no-drop"
                 >
-                  {/* <HiMinus /> */} hin -
+                  <HiMinus />
                 </button>
                 <span className="text-gray-5">{quantity}</span>
                 <button
                   type="button"
-                  disabled={quantity >= 5}
                   onClick={() => setQuantity(quantity + 1)}
                   className={`${quantity} == 5 ? "cursor-none" : "cursor-no-drop"`}
                 >
-                  {/* <HiPlus />*/} hin +
+                  <HiPlus />
                 </button>
               </div>
-              {/* {available_quantity === sellQuantity ? (
-                <ReqToStockButton reqToStock={reqToStock} cls="req-btn-lg" />
-              ) : (
-                <AddCartButton cartMedicine={cartMedicine} cls="cart-btn" />
-              )} */}
-              <button>Add To Card</button>
+              <div className="w-[40%]">
+                <PrimaryBtn
+                  btnType={"syner-solid"}
+                  btnText={"Add To Cart"}
+                  btnIcon={<BiCartAdd className="w-5 h-5" />}
+                />
+              </div>
             </div>
             <div className="text-[14px] space-y-1 md:space-y-2">
               <p className="font-medium text-black-2">

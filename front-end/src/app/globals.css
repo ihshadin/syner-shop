@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /*=====================CSS VARIABLES =======================*/
 :root {
   /*================= Colors ============*/
   --primary-color: #ff914d;
   --secondary-color: blue;
-  --primary-text: #FF914D;
+  --primary-text: #ff914d;
   --secondary-text: rgb(10, 10, 10);
-  --primary-border-color: gray;
+  --primary-border-color: rgb(194, 194, 194);
   --secondary-border-color: gray;
-  --primary-bg-color: #FF914D;
+  --primary-bg-color: #ff914d;
   --secondary-bg-color: white;
+  --white-color: white;
+  --black-color: black;
 }
 
 .syner-primary {
@@ -40,7 +41,18 @@
 .syner-secondary-bg {
   background-color: var(--secondary-bg-color);
 }
-
+.syner-white {
+  color: var(--white-color);
+}
+.syner-white-bg {
+  background-color: var(--white-color);
+}
+.syner-black {
+  color: var(--black-color);
+}
+.syner-black-bg {
+  background-color: var(--black-color);
+}
 
 /*==== container ====*/
 .syner-container {
