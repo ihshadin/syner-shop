@@ -7,9 +7,9 @@ import BannerSlider from "./BannerSlider";
 const HeroSection = () => {
   return (
     <>
-      <div className="syner-container md:grid grid-cols-3 gap-2">
+      <div className="syner-container md:grid grid-cols-4 gap-2">
         {/* Slider Section */}
-        <div className="col-span-2 ">
+        <div className="col-span-3 ">
           <BannerSlider />
         </div>
         {/* Banner Section */}
@@ -18,14 +18,14 @@ const HeroSection = () => {
             <Image
               src={image1}
               alt="Picture of the author"
-              className="w-[100%] h-[49.4vh] rounded-lg"
+              className="w-[100%] h-[31.4vh] rounded-lg"
             />
           </div>
           <div>
             <Image
               src={image2}
               alt="Picture of the author"
-              className="w-[100%] h-[49.4vh] rounded-lg"
+              className="w-[100%] h-[31.4vh] rounded-lg"
             />
           </div>
         </div>

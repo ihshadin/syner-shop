@@ -6,7 +6,7 @@ const NavSearch = () => {
     return (
         <Input
           classNames={{
-            base: "w-full md:w-[38rem] h-10",
+            base: "w-full md:w-[30rem] h-10",
             mainWrapper: "h-full",
             input: "text-small",
             inputWrapper: "h-full font-normal border focus:border-2",

@@ -1,6 +1,6 @@
 /* ==== Banner Slider CSS ==== */
 .main-slider .image-layer {
-    @apply bg-no-repeat bg-cover bg-center transition-transform duration-[5000ms] ease-in-out min-h-[80vh] md:min-h-[100vh] ;
+    @apply bg-no-repeat bg-cover bg-center transition-transform duration-[5000ms] ease-in-out min-h-[80vh] md:min-h-[65vh] ;
   }
   
   .main-slider .swiper-slide-active .image-layer {
