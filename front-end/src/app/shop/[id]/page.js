@@ -114,8 +114,12 @@ const SinglePage = () => {
                 },
                 largeImage: {
                   src: image,
-                  width: 800,
-                  height: 800,
+                  width: 1400,
+                  height: 1000,
+                  style: {
+                    "object-fit": "cover",
+                    "object-possition": "center center",
+                  },
                 },
               }}
             />
