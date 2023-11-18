@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "123456789",
+    "medicine_name": "Aspirin",
+    "image": "https://i.ibb.co/7zSsMP6/product-image-1.jpg",
+    "price": 19.99,
+    "sellQuantity": 50,
+    "available_quantity": 100,
+    "medicine_summary": "Aspirin is a nonsteroidal anti-inflammatory drug (NSAID) used to reduce pain, inflammation, and fever. It is also used to prevent blood clots and reduce the risk of heart attacks and strokes",
+    "medicine_description": "Aspirin is a widely used medication known for its pain-relieving, anti-inflammatory, and antipyretic (fever-reducing) properties. It is also used as a blood-thinning agent to prevent cardiovascular events. It is your complete daily health supplement, packed with 25 essential vitamins and minerals that boost immunity, maintain cardiovascular health, and improve fitness and strength, enhance memory and concentration and support overall wellbeing. ntioxidant properties of this immunity supplement help strengthen the immune system and neutralise free radicals.",
+    "tags": ["pain relief", "prescription", "over-the-counter"],
+    "rating": 4.5,
+    "feature_with_details": "Some feature details about the medicine.",
+    "category": "Pain Relief",
+    "allRatings": [5, 4, 4.5, 3.5],
+    "discount": 30,
+    "pharmacist_email": "pharmacist@example.com",
+    "order_quantity": 0
+  }
+]
