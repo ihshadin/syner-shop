@@ -1,9 +1,15 @@
 "use client";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Rating } from "@smastrom/react-rating";
-import HtmlParser from "react-html-parser";
 import "@smastrom/react-rating/style.css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css";
+import "./SingleProduct.css";
+
 import {
   BiCartAdd,
   BiLogoFacebook,
@@ -13,16 +19,20 @@ import {
   BiLogoPinterest,
   BiLogoTumblr,
   BiLogoTwitter,
+  BiShoppingBag,
   BiSolidEnvelope,
 } from "react-icons/bi";
 import { HiMinus, HiOutlineChevronRight, HiPlus } from "react-icons/hi";
 
 import ReactImageMagnify from "react-image-magnify";
 import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
+import ProductReview from "./ProductReview";
 
 const SinglePage = () => {
   const [loading, setLoading] = useState(true);
+  const [swiperRef, setSwiperRef] = useState(null);
   const [medicine, setMedicine] = useState([0]);
+  const [rating1, setRating] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -62,6 +72,7 @@ const SinglePage = () => {
     discount,
     pharmacist_email,
     order_quantity,
+    productsImages,
   } = medicine[0] || {};
 
   const cartMedicine = {
@@ -75,9 +86,9 @@ const SinglePage = () => {
   };
 
   return (
-    <section className="syner-container border border-red-700">
+    <section className="syner-container border border-[#c2c2c2] rounded">
       <div className="container mx-auto py-5 px-4 md:py-8 lg:pt-10 lg:px-2">
-        <p className="inline-flex items-center gap-1 font-medium md:font-semibold tracking-wider text-black-2 lg:text-lg">
+        <p className="inline-flex items-center gap-1 tracking-wider text-black-2 lg:text-lg">
           <Link
             href="/"
             className="hover:text-my-accent cursor-pointer transition-colors"
@@ -93,14 +104,14 @@ const SinglePage = () => {
           </Link>
           <HiOutlineChevronRight />
           <span>Details</span> <HiOutlineChevronRight />
-          <span>{medicine_name}</span>
+          <span className="hidden md:block">{medicine_name}</span>
         </p>
       </div>
       {/* product details */}
       <div className="">
         <div className="md:flex gap-5 ">
           <div className="md:w-1/2">
-            <ReactImageMagnify
+            {/* <ReactImageMagnify
               className="z-50"
               {...{
                 smallImage: {
@@ -122,59 +133,128 @@ const SinglePage = () => {
                   },
                 },
               }}
+            /> */}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Wristwatch by Ted Baker London",
+                  isFluidWidth: true,
+                  src: image,
+
+                  sizes:
+                    "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                },
+                largeImage: {
+                  src: image,
+                  width: 1200,
+                  height: 1800,
+                },
+                enlargedImageContainerDimensions: {
+                  width: "100%",
+                  height: "100%",
+                },
+              }}
             />
-          </div>
-          <div className="md:w-1/2 space-y-5 lg:space-y-7">
-            <div className="space-y-1">
-              {discount > 0 && (
-                <p className="z-10 rounded py-1 px-2 text-xs font-medium  syner-primary-bg syner-white w-[4.7rem]">
-                  -{discount}% OFF
-                </p>
-              )}
-              <h3 className="text-xl lg:text-3xl font-medium lg:font-semibold tracking-wider text-title-color">
-                {medicine_name}
-              </h3>
+            <div className="mt-4">
+              <Swiper
+                spaceBetween={10}
+                centeredSlides={true}
+                slidesPerView={5}
+                autoplay={{
+                  delay: 3500,
+                  disableOnInteraction: false,
+                }}
+                navigation={true}
+                modules={[Navigation]}
+                className="mySwiper "
+                initialSlide={2}
+              >
+                {productsImages?.map((img) => (
+                  <SwiperSlide>
+                    <img
+                      className="h-28 w-28"
+                      src={img?.image}
+                      alt=""
+                      srcset=""
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
-            <div className="flex gap-x-2 items-center">
+          </div>
+          <div className="md:w-1/2 mt-4 md:mt-0">
+            <h3 className="text-xl lg:text-3xl font-medium lg:font-semibold tracking-wider text-title-color">
+              {medicine_name}
+            </h3>
+            <div className="flex gap-x-2 items-center py-4">
               <Rating
                 style={{ maxWidth: 70 }}
                 value={rating}
                 readOnly
                 className="[&>*]:!fill-yellow-400 [&>*]:!stroke-yellow-400"
               />
-              <span className="text-xs font-semibold px-2 py-0.5 rounded syner-primary-bg syner-white">
-                {rating}
-              </span>
+              <span>{rating}</span>
+              <p className="font-medium  tracking-wide text-sm lg:text-base text-[#5cb85c] ">
+                {available_quantity === sellQuantity ? (
+                  <span className="text-red-500">Out of Stock</span>
+                ) : (
+                  <span className="text-my-primary">In Stock</span>
+                )}
+              </p>
             </div>
-            <p className="inline-flex gap-1">
-              <span className="font-semibold lg:font-bold text-my-pink inline-flex items-center text-lg md:text-xl lg:text-2xl">
-                ${" "}
-                {discount > 0
-                  ? (price - (price / 100) * discount)?.toFixed(2)
-                  : price?.toFixed(2)}
-              </span>
+            <div className=" bg-gray-100 p-4 rounded mb-5">
               {discount > 0 && (
-                <span className="font-medium inline-flex items-center text-base lg:text-xl text-gray-5 line-through">
-                  $ {price}
-                </span>
+                <div className="flex gap-2">
+                  <p className="font-medium line-through text-gray-400">
+                    $ {price}
+                  </p>
+                  <span>Inclusive of all taxes</span>
+                </div>
               )}
-            </p>
-            <p className="font-medium text-black-2 tracking-wide text-sm lg:text-base">
-              Availability :{" "}
-              {available_quantity === sellQuantity ? (
-                <span className="text-red-500">Out of Stock</span>
-              ) : (
-                <span className="text-my-primary">In Stock</span>
-              )}
-            </p>
-            <p className="text-gray-4 text-justify text-sm lg:text-base lg:leading-7 w-full">
+
+              <div className="flex gap-2 items-center mt-1">
+                <p className="font-semibold syner-primary-text  text-lg md:text-xl lg:text-2xl">
+                  ${" "}
+                  {discount > 0
+                    ? (price - (price / 100) * discount)?.toFixed(2)
+                    : price?.toFixed(2)}
+                </p>
+
+                {discount > 0 && (
+                  <p className="z-10 rounded py-1 px-2 text-xs font-medium  syner-primary-bg syner-white w-[4.7rem]">
+                    -{discount}% OFF
+                  </p>
+                )}
+              </div>
+            </div>
+            <p className="text-gray-4 text-justify text-sm lg:text-base lg:leading-5 w-full">
               {medicine_summary}
             </p>
-            <div className="border border-[#c2c2c2] py-4 px-3 rounded-md font-semibold flex items-center justify-between">
-              <span className="text-base lg:text-lg tracking-wide ">
-                Quantity:
-              </span>
-              <div className="border border-[#c2c2c2] rounded-full py-2 px-4 flex items-center justify-between gap-5 ">
+
+            <div className="flex items-center gap-4 mt-4">
+              <label className="block font-medium w-[60px]">Color :</label>
+              <select className=" text-sm border border-[#c2c2c2] rounded py-1 px-2 focus:ring-blue-500 focus:border-blue-500 block w-[465px]">
+                <option selected>Choose an option</option>
+                <option value="m">red</option>
+                <option value="l">black</option>
+                <option value="xl">gren</option>
+                <option value="xxl">orange</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-4 mt-4">
+              <label className="block font-medium w-[60px]">Size :</label>
+              <select className=" text-sm border border-[#c2c2c2] rounded py-1 px-2 focus:ring-blue-500 focus:border-blue-500 block w-[465px]">
+                <option selected>Choose an option</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">xl</option>
+                <option value="xxl">XXL</option>
+              </select>
+            </div>
+
+            <div className=" md:flex gap-4 my-4 pt-6">
+              <div className="border border-[#c2c2c2] rounded  px-4 font-semibold flex items-center justify-between gap-5 ">
                 <button
                   type="button"
                   disabled={quantity <= 1}
@@ -182,7 +262,7 @@ const SinglePage = () => {
                 >
                   <HiMinus />
                 </button>
-                <span className="text-gray-5">{quantity}</span>
+                <span className="text-gray-5 w-1">{quantity}</span>
                 <button
                   type="button"
                   onClick={() => setQuantity(quantity + 1)}
@@ -191,7 +271,14 @@ const SinglePage = () => {
                   <HiPlus />
                 </button>
               </div>
-              <div className="w-[40%]">
+              <div className="w-[200px]">
+                <PrimaryBtn
+                  btnType={"syner-outline"}
+                  btnText={"buy now"}
+                  btnIcon={<BiShoppingBag className="w-5 h-5" />}
+                />
+              </div>
+              <div className="w-[200px]">
                 <PrimaryBtn
                   btnType={"syner-solid"}
                   btnText={"Add To Cart"}
@@ -205,13 +292,14 @@ const SinglePage = () => {
               </p>
               <p className="font-medium text-black-2">
                 Categories:{" "}
-                <span className="text-gray-4">{category?.label}</span>
+                {/* <span className="text-gray-4">{category?.label}</span> */}
+                <span className="text-gray-4">HeadPhone</span>
               </p>
               <p className="font-medium text-black-2">
                 Tags:{" "}
                 {tags?.map((tag, idx) => (
                   <span key={idx} className="text-gray-4 mr-2">
-                    {tag?.label}
+                    {tag}
                   </span>
                 ))}
               </p>
@@ -234,12 +322,12 @@ const SinglePage = () => {
         </div>
       </div>
       {/* Description & reviews */}
-      <div className="my-container bg-white mt-10 rounded-md">
+      <div className="bg-white mt-16 rounded-md">
         <div className="flex gap-8">
           <div
             className={`${
-              isOpen ? "border-b-[3px]" : ""
-            } text-xl lg:text-2xl font-semibold tracking-wide text-title-color hover:text-my-accent border-my-accent pb-3 cursor-pointer transition duration-200`}
+              isOpen ? "border-b-[3px] syner-primary-border" : ""
+            } text-xl lg:text-2xl font-semibold tracking-wide cursor-pointer pb-1 transition duration-200`}
           >
             <button type="button" onClick={toggleOpen}>
               Description
@@ -247,8 +335,8 @@ const SinglePage = () => {
           </div>
           <div
             className={`${
-              isOpen ? "" : "border-b-[3px]"
-            } text-xl lg:text-2xl font-semibold tracking-wide text-title-color hover:text-my-accent border-my-accent pb-3 cursor-pointer transition duration-200`}
+              isOpen ? "" : "border-b-[3px] syner-primary-border"
+            } text-xl lg:text-2xl font-semibold tracking-wide cursor-pointer pb-1 transition duration-200`}
           >
             <button type="button" onClick={toggleOpen}>
               Reviews ({allRatings?.length || 0})
@@ -260,14 +348,14 @@ const SinglePage = () => {
           {/* description */}
           {isOpen && (
             <div className="transition-all duration-500 max-w-[100vw]">
-              <div className="lg:leading-8 pt-6 lg:pt-8">
-                {HtmlParser(medicine_description)}
-              </div>
+              <p className="lg:leading-8 pt-6 lg:pt-8">
+                {medicine_description}
+              </p>
               <div className="space-y-6 lg:space-y-10 pt-8 lg:pt-10">
                 <h3 className="text-xl lg:text-2xl font-medium lg:font-semibold tracking-wide text-black-2">
                   Product Features
                 </h3>
-                <div>{HtmlParser(feature_with_details)}</div>
+                <p>{feature_with_details}</p>
               </div>
             </div>
           )}
@@ -275,43 +363,7 @@ const SinglePage = () => {
           {/* Reviews  */}
           {!isOpen && (
             <div className="mt-8 w-full max-w-[100vw] transition-all duration-500">
-              {allRatings && <MedicineReviews allRatings={allRatings} />}
-              <div className="lg:w-4/5">
-                <h4 className="my-5 text-gray-5">
-                  Your feedback is invaluable.Share your thoughts and
-                  experiences with a quick review.
-                </h4>
-                <h3 className="my-1 text-xl font-semibold lg:tracking-wide">
-                  Your Rating
-                </h3>
-                <div>
-                  <Rating
-                    className="mb-5"
-                    style={{ maxWidth: 100 }}
-                    value={rating1}
-                    onChange={setRating}
-                    isRequired
-                  />
-                </div>
-                <div>
-                  <form onSubmit={handleReviews}>
-                    <div className="pb-6">
-                      <textarea
-                        required
-                        placeholder="Your Review"
-                        className="w-full outline-my-primary rounded-md border-[1px] border-gray-3 p-2"
-                        name="reviewMessage"
-                        rows="4"
-                      />
-                    </div>
-                    <input
-                      className="circle-btn"
-                      type="submit"
-                      value="SUBMIT YOUR REVIEW"
-                    />
-                  </form>
-                </div>
-              </div>
+              {allRatings && <ProductReview allRatings={allRatings} />}
             </div>
           )}
         </div>
