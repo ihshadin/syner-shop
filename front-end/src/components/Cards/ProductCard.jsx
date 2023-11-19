@@ -9,17 +9,20 @@ import { BsEye, BsHeart } from "react-icons/bs";
 import { TbArrowsExchange } from "react-icons/tb";
 import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 
-const ProductCard = () => {
+const ProductCard = ({product}) => {
+  const {name, reg_price, self_price, category, productImage} = product;
   return (
-    <div className="rounded-md shadow-md hover:shadow-xl overflow-hidden transition-shadow relative group h-fit">
+    <div className="rounded-md shadow-md hover:shadow-xl overflow-hidden transition-shadow relative group ">
       <p className="z-10 rounded py-1 px-2 text-xs font-medium absolute top-3 left-3 syner-primary-bg syner-white">
         -12% OFF
       </p>
-      <div className="card-body space-y-1">
+      <div className="flex flex-col h-full">
         <div className="relative">
           <Image
+            width={400}
+            height={400}
             className="h-[180px] md:h-[200px] lg:h-[250px] object-cover transition-all duration-300"
-            src={image1}
+            src={productImage}
             alt=""
           />
           <div className="opacity-0 group-hover:opacity-100 translate-x-20 group-hover:translate-x-0 flex flex-col gap-1 absolute right-1 top-1/2 -translate-y-1/2 transition-all duration-300">
@@ -31,11 +34,11 @@ const ProductCard = () => {
         <div className="p-2">
           <div className="">
             <p className="text-gray-5 text-xs font-semibold capitalize opacity-60">
-              computer items
+              {category}
             </p>
-            <Link href={`/shop/854`}>
-              <h2 className="text-base font-medium hover:underline hover:cursor-pointer">
-                Univision LED350 17 60Hz AH LED Monitor
+            <Link href={`/products/854`}>
+              <h2 className="text-base font-medium hover:underline hover:cursor-pointer h-12 line-clamp-2">
+                {name}
               </h2>
             </Link>
           </div>
@@ -52,16 +55,13 @@ const ProductCard = () => {
               </span>
             </div>
             <p className="inline-flex items-center gap-1 syner-black">
-              <span className="text-base lg:text-lg font-bold">$328</span>
+              <span className="text-base lg:text-lg font-bold">${reg_price}</span>
               <span className="text-sm lg:text-base opacity-70 line-through">
-                $564
+                ${self_price}
               </span>
             </p>
           </div>
         </div>
-        {/* <button className='kbm-bg-primary flex items-center gap-1 py-2 w-full justify-center kbm-white rounded-md uppercase text-sm' type="button">
-                    <BiCartAdd className="text-base md:text-xl" /> add to cart
-                </button> */}
         <div className="text-center text-xs">
           <PrimaryBtn
             btnType={"syner-solid"}

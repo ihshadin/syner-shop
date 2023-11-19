@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Progress } from "@nextui-org/react";
-import { BsStarFill } from "react-icons/bs";
 import ReviewCard from "./ReviewCard";
 import { Rating } from "@smastrom/react-rating";
 

@@ -97,10 +97,10 @@ const SinglePage = () => {
           </Link>
           <HiOutlineChevronRight />
           <Link
-            href="/shop"
+            href="/products"
             className="hover:text-my-accent cursor-pointer transition-colors"
           >
-            Shop
+            Products
           </Link>
           <HiOutlineChevronRight />
           <span>Details</span> <HiOutlineChevronRight />
