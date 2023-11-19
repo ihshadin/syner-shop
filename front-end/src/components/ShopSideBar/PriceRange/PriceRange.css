@@ -1,0 +1,26 @@
+@media (min-width: 768px){
+    .cTuNki,
+    .gNQdLy {
+        width: 100%  !important;
+        position: relative !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        /* opacity: 0;
+        visibility: hidden; */
+        /* padding: 12px 24px 48px 24px; */
+        opacity: 100 !important;
+        visibility: visible !important;
+        padding: 0px !important;
+        box-shadow: none !important;
+    }
+}
+.text-secondary-foreground {
+    color: var(--black-color);
+}
+.Slider__StyledSlider-sc-a8zzil-0 > div.block {
+    display: none;
+}
+.Slider__StyledSlider-sc-a8zzil-0.YZQqD {
+    overflow: hidden;
+}
