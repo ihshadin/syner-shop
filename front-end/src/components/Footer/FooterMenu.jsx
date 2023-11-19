@@ -1,11 +1,18 @@
 import React from 'react';
+import Image from "next/image";
+import logo from "@/assets/logo/syner-shop-color.png";
 import { FaFacebookSquare, FaTwitterSquare, FaInstagramSquare, FaWhatsappSquare} from 'react-icons/fa';
 
 const FooterMenu = () => {
     return (
         <div>
             <div class="grid  md:grid-cols-4 gap-4 p-10 syner-container">
-         
+            <div class="flex flex-col space-y-4 pe-8 ">
+            <Image className="w-36" src={logo} />
+           <p className='pt-2 text-base'>The team at Without A Trace has over 25 years of experience in the janitorial and sanitation industry. We are certified, licensed, and bonded.</p>
+           
+          </div>
+
           <div class="flex flex-col space-y-4">
             <h2 class="font-bold text-base">Quick Link</h2>
             <ul class="space-y-2 text-sm">
@@ -93,41 +100,7 @@ const FooterMenu = () => {
             </ul>
           </div>
 
-          <div class="flex flex-col space-y-4">
-            <h2 class="font-bold text-base">Business</h2>
-            <ul class="space-y-2 text-sm">
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Hair Care
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Makeup
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Body Shower
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Skin Care
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Cologine
-                </a>
-              </li>
-              <li>
-                <a href="#" class="hover:text-blue-600">
-                Perfume
-                </a>
-              </li>
-            </ul>
-          </div>
+          
 
           <div class="flex flex-col space-y-4 ">
             <h2 class="font-bold text-base">Contact us</h2>
