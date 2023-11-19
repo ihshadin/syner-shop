@@ -3,6 +3,7 @@
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import { BsDashLg, BsPlusLg } from "react-icons/bs";
 import { TbMinusVertical } from "react-icons/tb";
+import PriceRange from "./PriceRange/PriceRange";
 import Brand from './Brand';
 import ProcessorType from "./ProcessorType";
 import ProcessorModel from "./ProcessorModel";
@@ -16,6 +17,15 @@ const ShopSideBar = () => {
 
     return (
         <Accordion className="!px-0 !gap-5" itemClasses={itemClasses} variant="splitted" selectionMode="multiple" defaultSelectedKeys={`all`} isCompact>
+            <AccordionItem
+                className='!shadow'
+                key="1"
+                aria-label="Price"
+                title={<span className="font-semibold">Price</span>}
+                indicator={({ isOpen }) => (isOpen ? <TbMinusVertical /> : <BsPlusLg />)}
+            >
+                <PriceRange />
+            </AccordionItem>
             <AccordionItem
                 className='!shadow'
                 key="2"
