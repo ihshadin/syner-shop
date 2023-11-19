@@ -3,7 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./BannerSlider.css"
 // Import Swiper styles
-import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import "swiper/css/bundle";
 import SingleBannerSlider from './SingleBannerSlider';
 import mainSlider from "@/data/mainSlider";
@@ -18,7 +18,8 @@ const BannerSlider = () => {
         navigation
         effect="fade"
         autoplay
-        modules={[Navigation, EffectFade, Autoplay]}
+        pagination={{ clickable: true }}
+        modules={[Navigation, EffectFade, Autoplay, Pagination]}
       >
         {mainSlider.map((slider) => (
           <SwiperSlide key={slider.id}>
