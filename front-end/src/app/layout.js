@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "@/providers/providers";
 import NavBar from "@/components/NavBar/NavBar";
 import SubNavbar from "@/components/NavBar/SubNavbar";
+import Footer from "@/components/Footer/Footer";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <main>
           <Providers>{children}</Providers>
         </main>
+        <Footer/>
       </body>
     </html>
   );
