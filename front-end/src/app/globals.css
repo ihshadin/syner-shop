@@ -6,13 +6,10 @@
 :root {
   /*================= Colors ============*/
   --primary-color: #ff914d;
-  --secondary-color: blue;
-  --primary-text: #ff914d;
-  --secondary-text: rgb(10, 10, 10);
-  --primary-border-color: rgb(194, 194, 194);
-  --secondary-border-color: gray;
-  --primary-bg-color: #ff914d;
-  --secondary-bg-color: white;
+  --secondary-color: #0d344f;
+  --text-color: #777777;
+  --primary-border-color: #ff914d17;
+  --secondary-border-color: #0d344f17;
   --white-color: white;
   --black-color: black;
 }
@@ -23,11 +20,8 @@
 .syner-secondary {
   color: var(--secondary-color);
 }
-.syner-primary-text {
-  color: var(--primary-text);
-}
-.syner-secondary-text {
-  color: var(--secondary-text);
+.syner-text {
+  color: var(--text-color);
 }
 .syner-primary-border {
   border-color: var(--primary-border-color);
@@ -36,10 +30,10 @@
   border-color: var(--secondary-border-color);
 }
 .syner-primary-bg {
-  background-color: var(--primary-bg-color);
+  background-color: var(--primary-color);
 }
 .syner-secondary-bg {
-  background-color: var(--secondary-bg-color);
+  background-color: var(--secondary-color);
 }
 .syner-white {
   color: var(--white-color);
