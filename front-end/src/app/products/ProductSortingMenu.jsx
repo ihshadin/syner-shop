@@ -19,7 +19,7 @@ const ProductSortingMenu = () => {
                 <Menu
                     menuButton={
                         <MenuButton onClick={toggleMenu} className="flex items-center gap-2 font-semibold p-2 rounded-md  ease-in text-sm duration-150">
-                            Filter Medicines {isMenuOpen ? <BsChevronCompactUp /> : <BsChevronCompactDown />}
+                            Filter Products {isMenuOpen ? <BsChevronCompactUp /> : <BsChevronCompactDown />}
                         </MenuButton>
                     }
                     transition
@@ -33,6 +33,9 @@ const ProductSortingMenu = () => {
                     </MenuItem>
                     <MenuItem onClick={() => handelSort("byRating")} className="font-medium text-gray-5">
                         Height selling
+                    </MenuItem>
+                    <MenuItem onClick={() => handelSort("byRating")} className="font-medium text-gray-5">
+                        Height Ratings
                     </MenuItem>
                     <MenuItem onClick={() => handelSort("fNew")} className="font-medium text-gray-5">
                         New Product
