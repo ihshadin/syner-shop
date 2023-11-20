@@ -11,7 +11,9 @@
     @apply absolute top-0 left-0 bottom-0 right-0 content-[''] bg-[#1c0c0664] dark:bg-[#1c0c0690] z-0;
   }
   
-  .main-slider .swiper-button-next,
+  .main-slider .swiper-button-next{
+    @apply absolute bg-white text-black w-12 h-12 rounded-full hidden sm:flex items-center justify-center;
+  }
   .main-slider .swiper-button-prev {
     @apply absolute bg-white text-black w-12 h-12 rounded-full hidden sm:flex items-center justify-center;
   }

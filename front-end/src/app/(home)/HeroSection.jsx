@@ -4,6 +4,7 @@ import image1 from "../../../public/bannerImage/image-2.png";
 import image2 from "../../../public/bannerImage/image-1.webp";
 import BannerSlider from "./BannerSlider";
 
+
 const HeroSection = () => {
   return (
     <>
@@ -18,14 +19,14 @@ const HeroSection = () => {
             <Image
               src={image1}
               alt="Picture of the author"
-              className="w-[100%] h-[31.4vh] rounded-lg"
+              className="w-[100%] h-[32vh] rounded-lg"
             />
           </div>
           <div>
             <Image
               src={image2}
               alt="Picture of the author"
-              className="w-[100%] h-[31.4vh] rounded-lg"
+              className="w-[100%] h-[32vh] rounded-lg"
             />
           </div>
         </div>

@@ -13,13 +13,13 @@ const TopNav = () => {
         <li>
           <Link href="/seller">Seller Center</Link>
         </li>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="bg-[var(--text-color)]"/>
         <li className="">Location</li>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="bg-[var(--text-color)]"/>
         <li>
           <Link href="/download">Download</Link>
         </li>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="bg-[var(--text-color)]"/>
         <li className="flex items-center">
           <span className="mr-2">Follow us on :</span>
           <div className="flex items-center gap-3">
@@ -35,17 +35,17 @@ const TopNav = () => {
 
       <ul className="flex h-5 items-center space-x-4 text-small">
         <li className="flex gap-1 items-center">
-        <CiSquareQuestion />
+        <CiSquareQuestion className="h-4 w-4"/>
           <Link href="/login">Support</Link>
         </li>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="bg-[var(--text-color)]"/>
         <li className="flex gap-1 items-center">
-        <PiUserPlusThin />
+        <PiUserPlusThin className="h-4 w-4"/>
           <Link href="/register">Register</Link>
         </li>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="bg-[var(--text-color)]"/>
         <li className="flex gap-1 items-center">
-          <CiLogin />
+          <CiLogin className="h-4 w-4"/>
           <Link href="/login">Login</Link>
         </li>
       </ul>

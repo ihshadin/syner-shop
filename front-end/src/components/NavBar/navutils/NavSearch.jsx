@@ -21,7 +21,7 @@ const NavSearch = () => {
           <DropdownTrigger radius="none">
             <Button
               radius="none"
-              className="flex-shrink-0 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
+              className="flex-shrink-0 inline-flex items-center h-[2.5.5rem] px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
               auto
               ghost
               onClick={toggleDropdown}

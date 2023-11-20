@@ -1,9 +1,10 @@
-import { Montserrat } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/providers";
 import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+const archivo = Archivo({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -13,11 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={archivo.className}>
         <NavBar />
         <main>
           <Providers>{children}</Providers>
         </main>
+        <Footer/>
       </body>
     </html>
   );

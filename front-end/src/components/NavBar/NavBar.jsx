@@ -5,9 +5,9 @@ import BottomNav from "./BottomNav";
 
 const NavBar = () => {
   return (
-    <div className="px-4 bg-[#0d344f]">
+    <div className="px-4 mb-4 bg-[#0d344f]">
       <TopNav />
-      <Divider className="mt-2 mb-3" />
+      <Divider className="mt-2 bg-[var(--text-color)] absolute top-8 left-0 w-full" />
       <MidNavbar />
       <BottomNav />
     </div>
