@@ -15,12 +15,13 @@ import {
   Input,
   Link,
 } from "@nextui-org/react";
-import MailIcon from "./Modal/MailIcon";
-import LockIcon from "./Modal/LockIcon";
+
+import Image from "next/image";
 
 const Reviews = () => {
   const [rating, setRating] = useState(0);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const img = "https://i.ibb.co/7zSsMP6/product-image-1.jpg";
 
   return (
     <div className="min-h-screen mt-14 ">
@@ -164,58 +165,71 @@ const Reviews = () => {
 
       {/* Modal  */}
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
-        <ModalContent>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+        <ModalContent className="p-1">
           {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+            <div>
+              <ModalHeader className="flex gap-3">
+                <Image src={img} alt="Product Image" width={90} height={30} />
+                <div>
+                  <h2 className="font-normal text-sm">My Review</h2>
+                  <h1 className="font-base font-semibold">
+                    Quality Men's Hoodie for Winter, Men's Fashion Casual Hoodie
+                  </h1>
+                </div>
+              </ModalHeader>
+
               <Rating
-                style={{ maxWidth: 180 }}
+                style={{ maxWidth: 120 }}
                 value={rating}
-                className="my-2"
+                className="my-2 mx-4 mb-8"
                 readOnly
               />
-              <ModalBody>
-                <Input
-                  autoFocus
-                  endContent={
-                    <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  label="Email"
-                  placeholder="Enter your email"
-                  variant="bordered"
+
+              <form>
+                <label htmlFor="" className="mx-[18px] text-gray-500 text-sm">
+                  Your Name*
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  className="block w-[92%] mx-auto rounded border mt-1 border-gray-300  shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1 mb-4 pl-2 py-2"
+                  id=""
+                  placeholder="Enter you name"
                 />
-                <Input
-                  endContent={
-                    <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  label="Password"
-                  placeholder="Enter your password"
-                  type="password"
-                  variant="bordered"
+
+                <label htmlFor="" className="mx-[18px] text-gray-500 text-sm">
+                  Write you Review*
+                </label>
+                <input
+                  type="text"
+                  name="text"
+                  required
+                  id=""
+                  className="block  w-[92%] mx-auto rounded border mt-1 mb-3 border-gray-300  shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1 pb-20 pl-2 pt-2"
+                  placeholder="Example: Product wonderful"
                 />
-                <div className="flex py-2 px-1 justify-between">
-                  <Checkbox
-                    classNames={{
-                      label: "text-small",
-                    }}
-                  >
-                    Remember me
-                  </Checkbox>
-                  <Link color="primary" href="#" size="sm">
-                    Forgot password?
-                  </Link>
-                </div>
-              </ModalBody>
+
+                <label for="image" className="mx-[18px] text-gray-500 text-sm">
+                  Upload product Image
+                </label>
+
+                <input
+                  type="file"
+                  className="block w-[92%] mx-auto px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-slate-200 file:text-[ var(--text-color)] file:text-sm file:px-4 file:py-1 file:border-none file:rounded-md placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+                />
+              </form>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Sign in
+                <Button
+                  color="warning"
+                  radius="sm"
+                  onPress={onClose}
+                  variant="bordered"
+                >
+                  Save
                 </Button>
               </ModalFooter>
-            </>
+            </div>
           )}
         </ModalContent>
       </Modal>
