@@ -28,6 +28,7 @@ import ReactImageMagnify from "react-image-magnify";
 import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 import ProductReview from "./ProductReview";
 import RelatedProduct from "./RelatedProduct/RelatedProduct";
+import SectionTitle from "@/components/Titles/SectionTitle";
 
 const SinglePage = () => {
   const [loading, setLoading] = useState(true);
@@ -336,7 +337,9 @@ const SinglePage = () => {
           </div>
           <div
             className={`${
-              isOpen ? "" : "border-b-[3px] syner-primary-border"
+              isOpen
+                ? ""
+                : "border-b-[3px] border-[var(--primary-border-color)]"
             } text-xl lg:text-2xl font-semibold tracking-wide cursor-pointer pb-1 transition duration-200`}
           >
             <button type="button" onClick={toggleOpen}>
@@ -348,15 +351,13 @@ const SinglePage = () => {
         <div className="overflow-hidden relative">
           {/* description */}
           {isOpen && (
-            <div className="transition-all duration-500 max-w-[100vw]">
+            <div className="transition-all duration-500">
               <p className="lg:leading-8 pt-6 lg:pt-8">
                 {medicine_description}
               </p>
-              <div className=" pt-8">
-                <h3 className="text-xl lg:text-2xl font-medium racking-wide pb-6 ">
-                  Product Features
-                </h3>
-                <p>{feature_with_details}</p>
+              <div className="pt-8">
+                <SectionTitle title="Product Features" />
+                <p className="pt-4">{feature_with_details}</p>
               </div>
             </div>
           )}
@@ -371,9 +372,9 @@ const SinglePage = () => {
       </div>
       {/* Related Products */}
       <div className="mb-8">
-        <h3 className="text-xl lg:text-2xl font-medium racking-wide pb-6 pt-8 ">
-          Related Products
-        </h3>
+        <div className="my-6">
+          <SectionTitle title="Related Products" />
+        </div>
         <RelatedProduct />
       </div>
     </section>

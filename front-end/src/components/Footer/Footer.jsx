@@ -7,7 +7,7 @@ import NewsLatter from "./NewsLatter";
 const Footer = () => {
   return (
     <div>
-      <footer className="page-footer mt-10 bg-gray-200">
+      <footer className="page-footer mt-10 syner-secondary-bg ">
         <NewsLatter/>
         <hr className="syner-primary-border syner-container pb-5"/>
         <FooterMenu/>
