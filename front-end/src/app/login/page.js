@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const LoginPage = () => {
@@ -13,7 +14,7 @@ const LoginPage = () => {
         ></div>
         <div className="w-full p-8 lg:w-1/2">
           <h2 className="text-2xl font-semibold text-gray-700 text-center">
-            Brand
+            Syner
           </h2>
           <p className="text-xl text-gray-600 text-center">Welcome back!</p>
           <a
@@ -83,9 +84,9 @@ const LoginPage = () => {
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
-            <a href="#" className="text-xs text-gray-500 uppercase">
-              or sign up
-            </a>
+            <Link href="register" className="text-xs text-gray-500 uppercase">
+              or create account
+            </Link>
             <span className="border-b w-1/5 md:w-1/4"></span>
           </div>
         </div>
