@@ -17,7 +17,17 @@ const NavSearch = () => {
   return (
     <form className="relative">
       <div class="flex md:w-[40rem] ">
-        <Dropdown radius="none">
+        <Dropdown
+          
+          // style={{
+          //   position: "absolute !important",
+          //   zIndex: "100000 !important",
+          //   top: "100px !important",
+          //   maxHeight: "115.333px !important",
+          //   left: "261.281px !important",
+          // }}
+          radius="none"
+        >
           <DropdownTrigger radius="none">
             <Button
               radius="none"
@@ -65,7 +75,7 @@ const NavSearch = () => {
             required
           />
           <Button
-          size="xs"
+            size="xs"
             radius="none"
             type="submit"
             className="absolute top-0 end-0 p-2.5 w-1 text-sm font-medium h-full text-white syner-primary-bg fucus:syner-primary-bg"
