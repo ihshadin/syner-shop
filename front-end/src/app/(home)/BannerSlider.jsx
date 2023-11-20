@@ -13,6 +13,11 @@ const BannerSlider = () => {
     return (
         <section className="main-slider rounded-xl overflow-hidden">
       <Swiper
+      style={{
+        "--swiper-pagination-bullet-inactive-opacity": "1",
+        "--swiper-pagination-bullet-size": "10px",
+        "--swiper-pagination-bullet-horizontal-gap": "6px"
+      }}
         slidesPerView={1}
         loop
         navigation

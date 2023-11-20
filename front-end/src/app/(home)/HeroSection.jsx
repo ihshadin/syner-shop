@@ -4,7 +4,6 @@ import image1 from "../../../public/bannerImage/image-2.png";
 import image2 from "../../../public/bannerImage/image-1.webp";
 import BannerSlider from "./BannerSlider";
 
-
 const HeroSection = () => {
   return (
     <>
@@ -14,19 +13,19 @@ const HeroSection = () => {
           <BannerSlider />
         </div>
         {/* Banner Section */}
-        <div className="flex flex-col gap-2 pt-2 md:pt-0">
+        <div className="flex flex-col gap-2 pt-2 md:pt-0 ">
           <div>
             <Image
               src={image1}
               alt="Picture of the author"
-              className="w-[100%] h-[32vh] rounded-lg"
+              className="w-[100%] h-[169px] rounded-lg"
             />
           </div>
           <div>
             <Image
               src={image2}
               alt="Picture of the author"
-              className="w-[100%] h-[32vh] rounded-lg"
+              className="w-[100%] h-[169px] rounded-lg"
             />
           </div>
         </div>
