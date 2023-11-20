@@ -9,8 +9,8 @@ import { BsEye, BsHeart } from "react-icons/bs";
 import { TbArrowsExchange } from "react-icons/tb";
 import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 
-const ProductCard = ({product}) => {
-  const {name, reg_price, self_price, category, productImage} = product;
+const ProductCard = ({ product }) => {
+  const { name, reg_price, self_price, category, productImage } = product;
   return (
     <div className="rounded-md shadow-md hover:shadow-xl overflow-hidden transition-shadow relative group ">
       <p className="z-10 rounded py-1 px-2 text-xs font-medium absolute top-3 left-3 syner-primary-bg syner-white">
@@ -37,7 +37,7 @@ const ProductCard = ({product}) => {
               {category}
             </p>
             <Link href={`/products/854`}>
-              <h2 className="text-base font-medium hover:underline hover:cursor-pointer h-12 line-clamp-2">
+              <h2 className="text-sm md:text-base font-medium hover:underline hover:cursor-pointer h-10 md:h-12 line-clamp-2">
                 {name}
               </h2>
             </Link>
@@ -55,7 +55,9 @@ const ProductCard = ({product}) => {
               </span>
             </div>
             <p className="inline-flex items-center gap-1 syner-black">
-              <span className="text-base lg:text-lg font-bold">${reg_price}</span>
+              <span className="text-base lg:text-lg font-bold">
+                ${reg_price}
+              </span>
               <span className="text-sm lg:text-base opacity-70 line-through">
                 ${self_price}
               </span>

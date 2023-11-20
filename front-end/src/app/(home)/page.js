@@ -1,11 +1,10 @@
-import Image from 'next/image'
-import HeroSection from './HeroSection'
+import HeroSection from "./HeroSection";
 
- const Home = () => {
+const Home = () => {
   return (
-    <div>
-      <HeroSection/>
-    </div>
-  )
-}
-export default Home
+    <>
+      <HeroSection />
+    </>
+  );
+};
+export default Home;
