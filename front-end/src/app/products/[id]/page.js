@@ -336,7 +336,9 @@ const SinglePage = () => {
           </div>
           <div
             className={`${
-              isOpen ? "" : "border-b-[3px] syner-primary-border"
+              isOpen
+                ? ""
+                : "border-b-[3px] border-[var(--primary-border-color)]"
             } text-xl lg:text-2xl font-semibold tracking-wide cursor-pointer pb-1 transition duration-200`}
           >
             <button type="button" onClick={toggleOpen}>
@@ -348,7 +350,7 @@ const SinglePage = () => {
         <div className="overflow-hidden relative">
           {/* description */}
           {isOpen && (
-            <div className="transition-all duration-500 max-w-[100vw]">
+            <div className="transition-all duration-500">
               <p className="lg:leading-8 pt-6 lg:pt-8">
                 {medicine_description}
               </p>
