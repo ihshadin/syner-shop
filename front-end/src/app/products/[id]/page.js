@@ -27,6 +27,7 @@ import { HiMinus, HiOutlineChevronRight, HiPlus } from "react-icons/hi";
 import ReactImageMagnify from "react-image-magnify";
 import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 import ProductReview from "./ProductReview";
+import RelatedProduct from "./RelatedProduct/RelatedProduct";
 
 const SinglePage = () => {
   const [loading, setLoading] = useState(true);
@@ -351,8 +352,8 @@ const SinglePage = () => {
               <p className="lg:leading-8 pt-6 lg:pt-8">
                 {medicine_description}
               </p>
-              <div className="space-y-6 lg:space-y-10 pt-8 lg:pt-10">
-                <h3 className="text-xl lg:text-2xl font-medium lg:font-semibold tracking-wide text-black-2">
+              <div className=" pt-8">
+                <h3 className="text-xl lg:text-2xl font-medium racking-wide pb-6 ">
                   Product Features
                 </h3>
                 <p>{feature_with_details}</p>
@@ -367,6 +368,13 @@ const SinglePage = () => {
             </div>
           )}
         </div>
+      </div>
+      {/* Related Products */}
+      <div className="mb-8">
+        <h3 className="text-xl lg:text-2xl font-medium racking-wide pb-6 pt-8 ">
+          Related Products
+        </h3>
+        <RelatedProduct />
       </div>
     </section>
   );
