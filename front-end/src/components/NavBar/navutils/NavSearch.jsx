@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  Tooltip,
 } from "@nextui-org/react";
 
 const NavSearch = () => {
@@ -14,25 +15,19 @@ const NavSearch = () => {
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <form className="relative">
+    <form className="relative pt-0.5">
       <div class="flex md:w-[40rem] ">
-        <Dropdown
-          
-          // style={{
-          //   position: "absolute !important",
-          //   zIndex: "100000 !important",
-          //   top: "100px !important",
-          //   maxHeight: "115.333px !important",
-          //   left: "261.281px !important",
-          // }}
-          radius="none"
-        >
+        <Dropdown placement="bottom-start" radius="sm">
           <DropdownTrigger radius="none">
             <Button
+              isOpen={isOpen}
+              onOpenChange={(open) => setIsOpen(open)}
               radius="none"
-              className="flex-shrink-0 inline-flex items-center h-[2.5.5rem] px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
-              auto
+              className="flex-shrink-0 inline-flex items-center h-[2.5.5rem] px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 hover:bg-gray-200"
               ghost
               onClick={toggleDropdown}
             >
@@ -57,7 +52,27 @@ const NavSearch = () => {
             </Button>
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="new">New file</DropdownItem>
+            <DropdownItem key="new">
+              {/* <Tooltip
+                classNames={{
+                  base: [
+                    // arrow color
+                    "before:bg-neutral-400",
+                  ],
+                  content: [
+                    "py-2 px-4 shadow-xl",
+                    "text-black bg-gradient-to-br from-white to-neutral-400",
+                  ],
+                }}
+                placement="right"
+                content="i am jahid hasan"
+              >
+                <Button size="sm" ghost className="w-full mr-5 justify-start px-0 h-[2.5.5rem] text-sm bg-transparent text-gray-900">
+                  New Item
+                </Button>
+              </Tooltip> */}
+              New Item
+            </DropdownItem>
             <DropdownItem key="copy">Copy link</DropdownItem>
             <DropdownItem key="edit">Edit file</DropdownItem>
             <DropdownItem key="delete" className="text-danger" color="danger">
