@@ -247,19 +247,19 @@ const SinglePage = () => {
                 Select Size:
               </span>
               <div class="flex items-center mt-2">
-                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-medium mr-2 hover:bg-gray-300 text-sm ">
                   S
                 </button>
-                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-medium mr-2 hover:bg-gray-300 text-sm ">
                   M
                 </button>
-                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-medium mr-2 hover:bg-gray-300 text-sm ">
                   L
                 </button>
-                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-medium mr-2 hover:bg-gray-300 text-sm ">
                   XL
                 </button>
-                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-medium mr-2 hover:bg-gray-300 text-sm ">
                   XXL
                 </button>
               </div>
@@ -366,7 +366,10 @@ const SinglePage = () => {
                 {medicine_description}
               </p>
               <div className="pt-8">
-                <SectionTitle title="Product Features" />
+                <SectionTitle
+                  title="Product Features"
+                  subTitle="kico akta likhen"
+                />
                 <p className="pt-4">{feature_with_details}</p>
               </div>
             </div>

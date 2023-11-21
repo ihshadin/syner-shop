@@ -1,5 +1,7 @@
+import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 import Link from "next/link";
 import React from "react";
+import { PiUserPlusThin } from "react-icons/pi";
 
 const RegisterPage = () => {
   return (
@@ -13,38 +15,40 @@ const RegisterPage = () => {
           }}
         ></div>
 
-        <div className="w-full lg:w-1/2 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
-          <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+        <div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+          <h3 className="py-4 text-2xl text-center text-gray-800 ">
             Create an Account!
           </h3>
-          <form className="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded">
+          <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
             <div className="mb-4 md:flex md:justify-between">
               <div className="mb-4 md:mr-2 md:mb-0">
                 <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  className="block mb-2 text-sm font-bold text-gray-700"
                   for="firstName"
                 >
                   First Name
                 </label>
                 <input
-                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                  className="text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
                   id="firstName"
                   type="text"
                   placeholder="First Name"
+                  autoComplete="off"
                 />
               </div>
               <div className="md:ml-2">
                 <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  className="block mb-2 text-sm font-bold text-gray-70"
                   for="lastName"
                 >
                   Last Name
                 </label>
                 <input
-                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                  className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
+                  autoComplete="off"
                 />
               </div>
             </div>
@@ -56,25 +60,27 @@ const RegisterPage = () => {
                 Email
               </label>
               <input
-                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
                 id="email"
                 type="email"
                 placeholder="Email"
+                autoComplete="off"
               />
             </div>
             <div className="mb-4 md:flex md:justify-between">
               <div className="mb-4 md:mr-2 md:mb-0">
                 <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  className="block mb-2 text-sm font-bold text-gray-700"
                   for="password"
                 >
                   Password
                 </label>
                 <input
-                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                  className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg pb-[5px] px-4 block w-full appearance-none"
                   id="password"
                   type="password"
                   placeholder="******************"
+                  style={{ paddingTop: "11px" }}
                 />
                 {/* <p className="text-xs italic text-red-500">
                   Please choose a password.
@@ -82,16 +88,17 @@ const RegisterPage = () => {
               </div>
               <div className="md:ml-2">
                 <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
+                  className="block mb-2 text-sm font-bold text-gray-70"
                   for="c_password"
                 >
                   Confirm Password
                 </label>
                 <input
-                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                  id="c_password"
+                  className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg pb-[5px] px-4 block w-full appearance-none"
+                  id="password"
                   type="password"
                   placeholder="******************"
+                  style={{ paddingTop: "11px" }}
                 />
               </div>
             </div>
@@ -110,11 +117,16 @@ const RegisterPage = () => {
               />
             </div>
             <div className="mb-6 text-center">
-              <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
+              {/* <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
                 Register Account
-              </button>
+              </button> */}
+              <PrimaryBtn
+                btnType="syner-solid"
+                btnText="Register Account"
+                btnIcon={<PiUserPlusThin className="w-5 h-5" />}
+              />
             </div>
-            <hr className="mb-6 border-t" />
+            <hr className="mb-4 border-t" />
             <div className="text-center">
               <a
                 className="inline-block text-sm text-gray-500 align-baseline hover:text-blue-800"
