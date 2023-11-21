@@ -233,29 +233,39 @@ const SinglePage = () => {
               {medicine_summary}
             </p>
 
-            <div className="flex items-center gap-4 mt-4">
-              <label className="block font-medium w-[60px]">Color :</label>
-              <select className=" text-sm border border-[#c2c2c2] rounded py-1 px-2 focus:ring-blue-500 focus:border-blue-500 block w-[465px]">
-                <option selected>Choose an option</option>
-                <option value="m">red</option>
-                <option value="l">black</option>
-                <option value="xl">gren</option>
-                <option value="xxl">orange</option>
-              </select>
+            <div class="mb-4 pt-4">
+              <span class="font-bold text-gray-700">Select Color:</span>
+              <div class="flex items-center mt-2">
+                <button class="w-6 h-6 rounded-full bg-gray-800 dark:bg-gray-200 mr-2"></button>
+                <button class="w-6 h-6 rounded-full bg-red-500 dark:bg-red-700 mr-2"></button>
+                <button class="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-700 mr-2"></button>
+                <button class="w-6 h-6 rounded-full bg-yellow-500 dark:bg-yellow-700 mr-2"></button>
+              </div>
+            </div>
+            <div class="mb-4">
+              <span class="font-bold text-gray-700 dark:text-gray-300">
+                Select Size:
+              </span>
+              <div class="flex items-center mt-2">
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                  S
+                </button>
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                  M
+                </button>
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                  L
+                </button>
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                  XL
+                </button>
+                <button class="bg-gray-100 py-2 px-4 rounded-full font-bold mr-2 hover:bg-gray-400 dark:hover:bg-gray-600">
+                  XXL
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4 mt-4">
-              <label className="block font-medium w-[60px]">Size :</label>
-              <select className=" text-sm border border-[#c2c2c2] rounded py-1 px-2 focus:ring-blue-500 focus:border-blue-500 block w-[465px]">
-                <option selected>Choose an option</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">xl</option>
-                <option value="xxl">XXL</option>
-              </select>
-            </div>
-
-            <div className=" md:flex gap-4 my-4 pt-6">
+            <div className=" md:flex gap-4 my-4 pt-4">
               <div className="border border-[#c2c2c2] rounded  px-4 font-semibold flex items-center justify-between gap-5 ">
                 <button
                   type="button"

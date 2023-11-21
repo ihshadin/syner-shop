@@ -76,9 +76,9 @@ const RegisterPage = () => {
                   type="password"
                   placeholder="******************"
                 />
-                <p className="text-xs italic text-red-500">
+                {/* <p className="text-xs italic text-red-500">
                   Please choose a password.
-                </p>
+                </p> */}
               </div>
               <div className="md:ml-2">
                 <label
@@ -108,19 +108,8 @@ const RegisterPage = () => {
                 id="email"
                 type="file"
               />
-
-              {/* <input
-                type="file"
-                className="block w-[92%] mx-auto px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-slate-200 file:text-[ var(--text-color)] file:text-sm file:px-4 file:py-1 file:border-none file:rounded-md placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-              /> */}
             </div>
             <div className="mb-6 text-center">
-              {/* <button
-                className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"
-                type="button"
-              >
-                Register Account
-              </button> */}
               <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
                 Register Account
               </button>
@@ -128,7 +117,7 @@ const RegisterPage = () => {
             <hr className="mb-6 border-t" />
             <div className="text-center">
               <a
-                className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
+                className="inline-block text-sm text-gray-500 align-baseline hover:text-blue-800"
                 href="#"
               >
                 Forgot Password?
@@ -136,7 +125,7 @@ const RegisterPage = () => {
             </div>
             <div className="text-center">
               <Link
-                className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
+                className="inline-block text-sm text-gray-500 align-baseline hover:text-blue-800"
                 href="login"
               >
                 Already have an account? Login!
