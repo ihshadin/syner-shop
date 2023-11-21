@@ -1,5 +1,7 @@
+import PrimaryBtn from "@/components/Buttons/PrimaryBtn";
 import Link from "next/link";
 import React from "react";
+import { CiLogin, CiSquareQuestion } from "react-icons/ci";
 
 const LoginPage = () => {
   return (
@@ -41,7 +43,7 @@ const LoginPage = () => {
                 />
               </svg>
             </div>
-            <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
+            <h1 className="px-4 py-3 w-[90%] text-center text-gray-600 font-bold">
               Sign in with Google
             </h1>
           </a>
@@ -57,7 +59,7 @@ const LoginPage = () => {
               Email Address
             </label>
             <input
-              className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
               type="email"
               placeholder="Enter you email"
             />
@@ -72,15 +74,20 @@ const LoginPage = () => {
               </a>
             </div>
             <input
-              className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
               type="password"
               placeholder="Enter your password"
             />
           </div>
           <div className="mt-8">
-            <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
+            {/* <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
               Login
-            </button>
+            </button> */}
+            <PrimaryBtn
+              btnType="syner-solid"
+              btnText="login"
+              btnIcon={<CiLogin className="w-5 h-5" />}
+            />
           </div>
           <div className="mt-4 flex items-center justify-between">
             <span className="border-b w-1/5 md:w-1/4"></span>
