@@ -1,4 +1,5 @@
 "use client";
+import { Button, Input } from "@nextui-org/react";
 import React from "react";
 
 const CheckOut = () => {
@@ -33,6 +34,24 @@ const CheckOut = () => {
             {/* <h1 className="text-2xl font-bold text-gray-800  mb-4">Checkout</h1> */}
 
             {/* Special Offer coupon code */}
+
+            {/* <div>
+              <Input
+                classNames={{
+                  base: "max-w-full sm:max-w-[10rem] h-10",
+                  mainWrapper: "h-full",
+                  input: "text-small",
+                  inputWrapper:
+                    "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                }}
+                placeholder="Type to search..."
+                size="sm"
+                // startContent={<SearchIcon size={18} />}
+                endContent={<Button></Button>}
+                type="search"
+              />
+            </div> */}
+
             <div className="bg-gradient-to-r from-indigo-500 to-violet-500 text-white p-8 rounded-lg shadow-lg  mx-auto">
               <div className="text-3xl font-bold mb-2">Special Offer!</div>
               <div className="text-lg mb-2">

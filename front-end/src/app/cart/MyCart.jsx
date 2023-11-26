@@ -60,7 +60,7 @@ const MyCart = () => {
             <li className="flex md:flex-col py-6 ">
               <div className="md:flex mx-0 px-2 md:px-0 w-full space-x-2 sm:space-x-4">
                 <img
-                  className="md:flex-shrink-0 justify-center items-center object-cover w-24 h-24 md:w-32 md:h-32 rounded outline-none "
+                  className="md:flex-shrink-0 justify-center items-center object-cover w-24 h-24 md:w-24 md:h-24 rounded outline-none "
                   src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80"
                   alt="Polaroid camera"
                 />
