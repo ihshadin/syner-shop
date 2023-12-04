@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Logo from "./navutils/Logo";
 import NavCart from "./navutils/NavCart";
@@ -17,17 +17,19 @@ const MidNavbar = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <div className="search">
         <Logo />
-        <NavSearch />
-        <div className="flex gap-10 justify-between items-center text-white">
-          <NavCart />
-          <NavWishlist />
-          <NavUser />
+        <div className="flex items-center justify-between w-[72%]">
+          <NavSearch />
+          <div className="flex gap-10 justify-between text-white">
+            <NavCart />
+            <NavWishlist />
+            <NavUser />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
