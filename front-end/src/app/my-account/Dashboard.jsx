@@ -17,7 +17,7 @@ const DashboardSection = () => {
           <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
           <Link
             rel="noopener noreferrer"
-            href="#"
+            href="my-account/account-details"
             className="text-xs hover:underline dark:text-gray-400"
           >
             Edit profile

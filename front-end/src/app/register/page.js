@@ -112,7 +112,7 @@ const RegisterPage = () => {
               </label>
               <input
                 className="w-full mx-auto px-3 py-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-slate-200 file:text-[ var(--text-color)] file:text-sm file:px-4 file:py-1 file:border-none file:rounded-md placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                id="email"
+                id="image"
                 type="file"
               />
             </div>
