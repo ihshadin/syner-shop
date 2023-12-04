@@ -74,7 +74,7 @@ const LoginPage = () => {
               </a>
             </div>
             <input
-              className=" text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
+              className="text-gray-700 focus:outline-[8px] outline-[var(--primary-outline-color)] focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none"
               type="password"
               placeholder="Enter your password"
             />
