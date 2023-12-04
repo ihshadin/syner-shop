@@ -19,10 +19,10 @@ const NavSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <form className="relative pt-0.5">
-      <div class="flex md:w-[40rem] ">
+    <form className="relative">
+      <div class="flex w-[18rem] md:w-[40rem]">
         <Dropdown placement="bottom-start" radius="sm">
-          <DropdownTrigger radius="none">
+          <DropdownTrigger radius="none" className="hidden md:flex">
             <Button
               isOpen={isOpen}
               onOpenChange={(open) => setIsOpen(open)}
@@ -52,27 +52,7 @@ const NavSearch = () => {
             </Button>
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="new">
-              {/* <Tooltip
-                classNames={{
-                  base: [
-                    // arrow color
-                    "before:bg-neutral-400",
-                  ],
-                  content: [
-                    "py-2 px-4 shadow-xl",
-                    "text-black bg-gradient-to-br from-white to-neutral-400",
-                  ],
-                }}
-                placement="right"
-                content="i am jahid hasan"
-              >
-                <Button size="sm" ghost className="w-full mr-5 justify-start px-0 h-[2.5.5rem] text-sm bg-transparent text-gray-900">
-                  New Item
-                </Button>
-              </Tooltip> */}
-              New Item
-            </DropdownItem>
+            <DropdownItem key="new">New Item</DropdownItem>
             <DropdownItem key="copy">Copy link</DropdownItem>
             <DropdownItem key="edit">Edit file</DropdownItem>
             <DropdownItem key="delete" className="text-danger" color="danger">
@@ -86,14 +66,12 @@ const NavSearch = () => {
             type="search"
             id="search-dropdown"
             className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 border-s-gray-50 border-s-2 border border-gray-300 focus:outline-none focus:bg-gray-100"
-            placeholder="Search Mockups, Logos, Design Templates..."
+            placeholder="Search your products..."
             required
           />
-          <Button
-            size="xs"
-            radius="none"
+          <button
             type="submit"
-            className="absolute top-0 end-0 p-2.5 w-1 text-sm font-medium h-full text-white syner-primary-bg fucus:syner-primary-bg"
+            className="absolute top-0 end-0 px-4 text-sm font-medium h-full text-white syner-primary-bg fucus:syner-primary-bg"
           >
             <svg
               class="w-4 h-4"
@@ -110,7 +88,7 @@ const NavSearch = () => {
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>
-          </Button>
+          </button>
         </div>
       </div>
     </form>

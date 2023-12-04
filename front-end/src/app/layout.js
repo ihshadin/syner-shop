@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "@/providers/providers";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import ResponsiveNav from "@/components/NavBar/ResponsiveNav";
 
 const archivo = Archivo({ subsets: ["latin"] });
 
@@ -16,10 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={archivo.className}>
         <NavBar />
+        <ResponsiveNav />
         <main>
           <Providers>{children}</Providers>
         </main>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

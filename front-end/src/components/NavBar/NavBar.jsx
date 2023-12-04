@@ -5,11 +5,13 @@ import BottomNav from "./BottomNav";
 
 const NavBar = () => {
   return (
-    <div className="mb-4 bg-[#0d344f]">
-      <TopNav />
-      <Divider className="mt-2 bg-[var(--text-color)] absolute top-8 left-0 w-full" />
-      <MidNavbar />
-      <BottomNav />
+    <div>
+      <div className="hidden md:block mb-4 bg-[#0d344f]">
+        <TopNav />
+        <Divider className="mt-2 bg-[var(--text-color)] absolute top-8 left-0 w-full" />
+        <MidNavbar />
+        <BottomNav />
+      </div>
     </div>
   );
 };

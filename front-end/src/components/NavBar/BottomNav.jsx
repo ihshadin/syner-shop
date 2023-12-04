@@ -120,7 +120,9 @@ const BottomNav = () => {
                       key={subIndex}
                       className="border-b text-sm hover:bg-[var(--text-color)] min-w-[9rem] px-2 py-1 rounded-md group/jahid2 w-fit whitespace-nowrap transition duration-300 ease-in-out transform hover:scale-105"
                     >
-                      <a href={subMenuItem.link}>{subMenuItem.label}jahid2</a>
+                      <Link href={subMenuItem.link}>
+                        {subMenuItem.label}jahid2
+                      </Link>
                       {subMenuItem.subMenu && (
                         <ul className="group-hover/jahid2:block absolute left-full top-0 hidden bg-white shadow-md border px-3 rounded-md py-2 space-y-2">
                           {subMenuItem.subMenu.map(
@@ -129,10 +131,10 @@ const BottomNav = () => {
                                 key={nestedIndex}
                                 className="border-b text-xs hover:bg-[var(--text-color)] min-w-[9rem] px-2 py-1 rounded-md transition duration-100 ease-in-out transform hover:scale-105"
                               >
-                                <a href={nestedMenuItem.link}>
+                                <Link href={nestedMenuItem.link}>
                                   {nestedMenuItem.label}
                                   jahid3
-                                </a>
+                                </Link>
                               </li>
                             )
                           )}
@@ -148,42 +150,72 @@ const BottomNav = () => {
 
         <ul className="flex capitalize gap-4">
           <li className="flex items-center gap-5 ">
-            <Link href="/" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">home</Link>
+            <Link
+              href="/"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              home
+            </Link>
             <Divider
               orientation="vertical"
               className="bg-[var(--text-color)] h-4 w-[1px]"
             />
           </li>
           <li className="flex items-center gap-5">
-            <Link href="/pages" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">Products</Link>
+            <Link
+              href="/pages"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              Products
+            </Link>
             <Divider
               orientation="vertical"
               className="bg-[var(--text-color)] h-4 w-[1px]"
             />
           </li>
           <li className="flex items-center gap-5">
-            <Link href="/user" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">user account</Link>
+            <Link
+              href="/user"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              user account
+            </Link>
             <Divider
               orientation="vertical"
               className="bg-[var(--text-color)] h-4 w-[1px]"
             />
           </li>
           <li className="flex items-center gap-5">
-            <Link href="/vendor" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">vendor account</Link>
+            <Link
+              href="/vendor"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              vendor account
+            </Link>
             <Divider
               orientation="vertical"
               className="bg-[var(--text-color)] h-4 w-[1px]"
             />
           </li>
           <li className="flex items-center gap-5">
-            <Link href="/track" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">track my order</Link>
+            <Link
+              href="/track"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              track my order
+            </Link>
             <Divider
               orientation="vertical"
               className="bg-[var(--text-color)] h-4 w-[1px]"
             />
           </li>
           <li className="flex">
-            <Link href="/contact" className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]">contact</Link>
+            <Link
+              href="/contact"
+              className="transition duration-300 ease-in-out transform hover:scale-105 hover:text-[var(--primary-color)]"
+            >
+              contact
+            </Link>
           </li>
         </ul>
       </div>
