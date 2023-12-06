@@ -5,8 +5,8 @@ import BottomNav from "./BottomNav";
 
 const NavBar = () => {
   return (
-    <div>
-      <div className="hidden md:block mb-4 bg-[#0d344f]">
+    <div className="syner-secondary-bg">
+      <div className="hidden md:block">
         <TopNav />
         <Divider className="mt-2 bg-[var(--text-color)] absolute top-8 left-0 w-full" />
         <MidNavbar />
