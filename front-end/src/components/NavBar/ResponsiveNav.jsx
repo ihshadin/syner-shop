@@ -8,7 +8,7 @@ import { TbCategory, TbMenu2, TbHome } from "react-icons/tb";
 const ResponsiveNav = () => {
   return (
     <div className="md:hidden">
-      <div className="syner-secondary-bg flex items-center gap-2 w-full px-[10px] py-2 mb-2">
+      <div className="syner-secondary-bg flex items-center gap-2 w-full px-[10px] py-2">
         <Logo />
         <NavSearch />
       </div>

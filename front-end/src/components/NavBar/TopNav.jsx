@@ -8,7 +8,7 @@ import { Divider } from "@nextui-org/react";
 
 const TopNav = () => {
   return (
-    <div className="hidden md:flex px-4 justify-between items-center py-2 text-white">
+    <div className="hidden md:flex justify-between items-center py-2 text-white syner-container">
       <ul className="flex h-5 items-center space-x-4 text-small">
         <li>
           <Link href="/seller">Seller Center</Link>

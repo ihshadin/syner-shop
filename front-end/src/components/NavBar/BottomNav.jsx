@@ -96,7 +96,7 @@ const BottomNav = () => {
   ];
 
   return (
-    <header className="pb-4 text-[var(--white-color)] !w-full">
+    <header className="pb-4 text-[var(--white-color)] !w-full syner-container">
       <div className="flex justify-between">
         <ul className="flex space-x-4 z-50 text-black">
           {menuData.map((menuSection, index) => (
