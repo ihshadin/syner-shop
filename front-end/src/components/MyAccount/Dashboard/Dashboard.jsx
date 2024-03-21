@@ -10,13 +10,12 @@ import Search from "@/assets/images/dashboard/Search.png";
 import Chart from "@/assets/images/dashboard/Chart.png";
 import Folder from "@/assets/images/dashboard/Folder.png";
 import Setting from "@/assets/images/dashboard/Setting.png";
-import control from "@/assets/images/dashboard/control.png";
-import logo from "@/assets/logo/syner-shop-favicon.png";
 import { BsChevronBarRight } from "react-icons/bs";
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
+import MenuItems from "@/components/MyAccount/Sidebar/MenuItems";
+import SiteInfo from "@/components/MyAccount/Sidebar/SiteInfo";
 
-const DashboardSection = () => {
-  const [expanded, setExpanded] = useState(true);
+const DashboardSection = ({ expanded, setExpanded }) => {
   const Menus = [
     { title: "Dashboard", src: Chart_fill.src, alert },
     { title: "Inbox", src: Chat.src },
@@ -174,108 +173,27 @@ const DashboardSection = () => {
           </ul>
         </div>
       </div> */}
-      <div
-        className={`syner-secondary-bg p-4 pt-8 relative transition-all duration-300`}
-        // ${
-        //   expanded ? "w-72" : "w-20 "
-        // }
-      >
-        <HiChevronDoubleLeft
-          className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 syner-white syner-primary-bg p-1 border-[--secondary-color]
-           border-2 rounded-full  ${!expanded && "rotate-180"}`}
-          onClick={() => setExpanded(!expanded)}
-        />
+      {/* expanded ? "ml-0" : "-ml-16 md:ml-0" */}
 
-        <div className="flex items-center">
-          <Image
-            width={40}
-            height={40}
-            className={`cursor-pointer duration-500`}
-            src={`${logo.src}`}
+      <HiChevronDoubleLeft
+        className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 transition-all duration-200 syner-white syner-primary-bg p-1 border-[--secondary-color]
+           border-2 rounded-full  ${
+             !expanded && "rotate-180 -right-8 md:-right-3"
+           }`}
+        onClick={() => setExpanded(!expanded)}
+      />
+
+      <SiteInfo expanded={expanded} />
+      <ul className="pt-3">
+        {Menus.map((Menu, index) => (
+          <MenuItems
+            Menu={Menu}
+            expanded={expanded}
+            index={index}
+            key={index}
           />
-          <div
-            className={`transition-all duration-200 ${
-              expanded ? "w-52 ml-2" : "w-0 invisible"
-            }`}
-          >
-            <h1
-              className={`whitespace-nowrap syner-white origin-left font-semibold text-lg`}
-            >
-              SYNER SHOP
-            </h1>
-            <p className="whitespace-nowrap syner-white opacity-80 text-xs -mt-1">
-              Your Trusted online Friend
-            </p>
-          </div>
-        </div>
-        <ul className="pt-3">
-          {Menus.map((Menu, index) => (
-            // <li
-            //   key={index}
-            //   className={`flex rounded-md p-2 cursor-pointer hover:bg-[var(--primary-color)] syner-white items-center h-9
-            //   ${Menu.gap ? "mt-9" : "mt-2"} ${
-            //     index === 0 && "syner-primary-bg syner-white"
-            //   } `}
-            // >
-            //   <Image
-            //     width={60}
-            //     height={60}
-            //     className="w-5 h-5"
-            //     src={`${Menu.src}`}
-            //   />
-            //   <span
-            //     className={`${
-            //       expanded ? "w-52 ml-3" : "w-0 invisible"
-            //     } origin-left duration-200`}
-            //   >
-            //     {Menu.title}
-            //   </span>
-            // </li>
-            <li
-              className={`flex rounded-md py-2 px-3 cursor-pointer hover:bg-[var(--primary-color)] syner-white items-center relative font-medium transition-colors group ${
-                Menu.gap ? "mt-9" : "mt-2"
-              } ${index === 0 && "syner-primary-bg syner-white"}`}
-              // ${
-              //   active
-              //     ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-              //     : "hover:bg-indigo-50 text-gray-600"
-              // }
-            >
-              {/* {icon} */}
-              <Image
-                width={60}
-                height={60}
-                className="w-5 h-5"
-                src={`${Menu.src}`}
-              />
-              <span
-                className={`overflow-hidden transition-all ${
-                  expanded ? "w-52 ml-3" : "w-0"
-                }`}
-              >
-                {/* {text} */}
-                {Menu.title}
-              </span>
-              {Menu.alert && (
-                <div
-                  className={`absolute right-2 w-2 h-2 rounded syner-white-bg ${
-                    expanded ? "" : "top-2"
-                  }`}
-                />
-              )}
-
-              {!expanded && (
-                <div
-                  className={`absolute left-full rounded-md px-2 py-1 ml-6 bg-[var(--secondary-color)] syner-white text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
-                >
-                  {/* {text} */}
-                  {Menu.title}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+        ))}
+      </ul>
     </>
   );
 };
