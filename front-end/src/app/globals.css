@@ -2,18 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /*=====================CSS VARIABLES =======================*/
 :root {
   /*================= Colors ============*/
   --primary-color: #ff914d;
-  --secondary-color: blue;
-  --primary-text: #FF914D;
-  --secondary-text: rgb(10, 10, 10);
-  --primary-border-color: gray;
-  --secondary-border-color: gray;
-  --primary-bg-color: #FF914D;
-  --secondary-bg-color: white;
+  --secondary-color: #0d344f;
+  --text-color: #777777;
+  --primary-border-color: #ff914d17;
+  --secondary-border-color: #0d344f17;
+  --primary-outline-color: #ff914d90;
+  --white-color: white;
+  --black-color: black;
 }
 
 .syner-primary {
@@ -22,11 +21,8 @@
 .syner-secondary {
   color: var(--secondary-color);
 }
-.syner-primary-text {
-  color: var(--primary-text);
-}
-.syner-secondary-text {
-  color: var(--secondary-text);
+.syner-text {
+  color: var(--text-color);
 }
 .syner-primary-border {
   border-color: var(--primary-border-color);
@@ -35,12 +31,23 @@
   border-color: var(--secondary-border-color);
 }
 .syner-primary-bg {
-  background-color: var(--primary-bg-color);
+  background-color: var(--primary-color);
 }
 .syner-secondary-bg {
-  background-color: var(--secondary-bg-color);
+  background-color: var(--secondary-color);
 }
-
+.syner-white {
+  color: var(--white-color);
+}
+.syner-white-bg {
+  background-color: var(--white-color);
+}
+.syner-black {
+  color: var(--black-color);
+}
+.syner-black-bg {
+  background-color: var(--black-color);
+}
 
 /*==== container ====*/
 .syner-container {
@@ -49,4 +56,15 @@
   padding-left: 10px;
   padding-right: 10px;
   margin: 0 auto;
+}
+
+header {
+  max-width: 1280px !important;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }

@@ -1,0 +1,32 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-width: 1280px;
+  width: 100%;
+  /* transition: 0.3s; */
+}
+
+.active {
+  height: 12vh;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: var(--secondary-color);
+  max-width: 1280px;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+/* ._background {
+  background-color: var(--secondary-color);
+}
+
+._synerBackground {
+  background-color: var(--secondary-color);
+  width: 100%;
+  max-width: none !important;
+} */

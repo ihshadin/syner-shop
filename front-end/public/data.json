@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "123456789",
+    "medicine_name": "Quality Men's Hoodie for Winter, Men's Fashion Casual Hoodie",
+    "image": "https://i.ibb.co/7zSsMP6/product-image-1.jpg",
+    "price": 19.99,
+    "sellQuantity": 50,
+    "available_quantity": 100,
+    "medicine_summary": "Aspirin is a nonsteroidal anti-inflammatory drug (NSAID) used to reduce pain, inflammation, and fever. It is also used to prevent blood clots and reduce the risk of heart attacks and strokes",
+    "medicine_description": "Aspirin is a widely used medication known for its pain-relieving, anti-inflammatory, and antipyretic (fever-reducing) properties. It is also used as a blood-thinning agent to prevent cardiovascular events. It is your complete daily health supplement, packed with 25 essential vitamins and minerals that boost immunity, maintain cardiovascular health, and improve fitness and strength, enhance memory and concentration and support overall wellbeing. ntioxidant properties of this immunity supplement help strengthen the immune system and neutralise free radicals.",
+    "tags": ["pain relief", "prescription", "over-the-counter"],
+    "rating": 10.5,
+    "feature_with_details": "Elevate your audio experience with these headphones—featuring high-quality sound, comfort, wireless connectivity, noise cancellation, extended battery life, a built-in microphone, foldable portability, and intuitive touch controls—all in one sleek package Convenient LED indicators for battery and connectivity status, keeping you informed at a glance. Effortlessly collapse the headphones for compact storage in the included carrying case, ideal for travel.",
+    "category": "headphones",
+    "allRatings": [5, 4, 4.5, 3.5],
+    "discount": 30,
+    "pharmacist_email": "pharmacist@example.com",
+    "order_quantity": 0,
+    "productsImages": [
+      {
+        "image": "https://static-01.daraz.com.bd/p/308b17b3d3288348c2bce1b65313fe33.jpg_750x750.jpg_.webp"
+      },
+      {
+        "image": "https://static-01.daraz.com.bd/p/3841d116438f35dbfc0088481b654ff4.jpg_750x750.jpg_.webp"
+      },
+      {
+        "image": "https://static-01.daraz.com.bd/p/308b17b3d3288348c2bce1b65313fe33.jpg_750x750.jpg_.webp"
+      },
+      {
+        "image": "https://static-01.daraz.com.bd/p/43dd5f7ec5a951c55b57a0e071f2aaf5.jpg_750x750.jpg_.webp"
+      },
+      {
+        "image": "https://static-01.daraz.com.bd/p/308b17b3d3288348c2bce1b65313fe33.jpg_750x750.jpg_.webp"
+      }
+    ]
+  }
+]
