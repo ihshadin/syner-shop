@@ -4,8 +4,8 @@ import catchAsync from '../utils/catchAsync';
 import appError from '../errors/appError';
 import httpStatus from 'http-status';
 import config from '../config';
-import { User } from '../modules/user/user.model';
-import { TUserRole } from '../modules/user/user.interface';
+import { TUserRole } from '../modules/User/user.interface';
+import { User } from '../modules/User/user.model';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -39,17 +39,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     // checking if the user is already deleted
-    const isDeleted = user?.isDeleted;
+    const isBlocked = user?.isBlocked;
 
-    if (isDeleted) {
+    if (isBlocked) {
       throw new appError(httpStatus.FORBIDDEN, 'This user is deleted !');
-    }
-
-    // checking if the user is blocked
-    const userStatus = user?.status;
-
-    if (userStatus === 'blocked') {
-      throw new appError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
