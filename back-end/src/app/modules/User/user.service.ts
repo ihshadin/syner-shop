@@ -1,14 +1,29 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
-import { TLoginUser, TUser } from './user.interface';
+import { TUser } from './user.interface';
 import { User } from './user.model';
 import appError from '../../errors/appError';
 import config from '../../config';
-import { createToken } from './user.utils';
 import bcrypt from 'bcrypt';
-import { JwtPayload } from 'jsonwebtoken';
+import { USER_ROLE } from './user.constant';
+import { TCustomer } from '../Customer/customer.interface';
+import mongoose from 'mongoose';
+import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
+import { Customer } from '../Customer/customer.model';
 
-const registrationUser = async (payload: TUser) => {
-  payload.passwordChangeHistory = [
+const registrationCustomerIntoDb = async (file: any, payload: TCustomer) => {
+  const user = await User.isUserExistsByUsername(payload.username);
+
+  if (user) {
+    throw new appError(httpStatus.FORBIDDEN, 'User Already Exists');
+  }
+
+  const userData: Partial<TUser> = {};
+  userData.username = payload.username;
+  userData.password = payload.password;
+  userData.email = payload.email;
+  userData.role = USER_ROLE.customer;
+  userData.passwordChangeHistory = [
     {
       password: await bcrypt.hash(
         payload.password,
@@ -18,106 +33,105 @@ const registrationUser = async (payload: TUser) => {
     },
   ];
 
-  const result = await User.create(payload);
+  const session = await mongoose.startSession();
 
-  return result;
-};
+  try {
+    session.startTransaction();
 
-const loginUser = async (payload: TLoginUser) => {
-  // checking if the user is exist
-  const user = await User.isUserExistsByCustomId(payload.username);
+    if (file) {
+      const imageName = `${userData.username}`;
+      const path = file?.path;
 
-  if (!user) {
-    throw new appError(
-      httpStatus.NOT_FOUND,
-      'You do not have the necessary permissions to access this resource',
-    );
-  }
-
-  //checking if the password is correct
-  if (!(await User.isPasswordMatched(payload?.password, user?.password))) {
-    throw new appError(httpStatus.FORBIDDEN, 'Password do not matched');
-  }
-
-  //create token and sent to the  client
-  const jwtPayload = {
-    username: user.username,
-    role: user.role,
-  };
-
-  const token = createToken(
-    jwtPayload,
-    config.jwt_access_token as string,
-    config.jwt_access_expires_in as string,
-  );
-
-  // const newUser = await User.findOne({ username: user.username });
-
-  return {
-    // user: newUser,
-    token,
-  };
-};
-
-const changePassword = async (
-  userData: JwtPayload,
-  payload: { currentPassword: string; newPassword: string },
-) => {
-  const user = await User.isUserExistsByCustomId(userData.username);
-
-  if (!user) {
-    throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
-  }
-
-  if (!(await User.isPasswordMatched(payload.currentPassword, user.password)))
-    throw new appError(httpStatus.FORBIDDEN, 'Password do not matched');
-
-  // Check if the new password matches any of the last 2 passwords or the current one
-  const passwordHistory = user.passwordChangeHistory || [];
-  let isPasswordInHistory = false;
-
-  for (const entry of passwordHistory) {
-    if (await User.isPasswordMatched(payload.newPassword, entry.password)) {
-      isPasswordInHistory = true;
-      break;
+      const { secure_url } = await sendImageToCloudinary(imageName, path);
+      payload.profileImg = secure_url as string;
     }
+
+    //create a new user
+    const newUser = await User.create([userData], { session });
+    if (!newUser.length) {
+      throw new appError(httpStatus.BAD_REQUEST, 'Failed to create user');
+    }
+
+    // set username , _id as user
+    payload.username = newUser[0].username;
+    payload.user = newUser[0]._id;
+
+    //create a new Customer
+    const newCustomer = await Customer.create([payload], { session });
+
+    if (!newCustomer.length) {
+      throw new appError(httpStatus.BAD_REQUEST, 'Failed to Create Customer');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+
+    return newCustomer;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    // throw new Error('Failed to create student');
+    throw error;
   }
-
-  if (isPasswordInHistory) {
-    throw new appError(
-      httpStatus.FORBIDDEN,
-      `Password change failed. Ensure the new password is unique and not among the last 2 used (last used on ${
-        passwordHistory[0]?.timestamp || new Date()
-      }).`,
-    );
-  }
-
-  const newHashedPassword = await bcrypt.hash(
-    payload.newPassword,
-    Number(config.bcrypt_salt_rounds),
-  );
-
-  const updatedHistory = [
-    { password: newHashedPassword, timestamp: new Date() },
-    ...passwordHistory.slice(0, 2),
-  ];
-
-  const result = await User.findOneAndUpdate(
-    {
-      username: userData.username,
-      role: userData.role,
-    },
-    {
-      password: newHashedPassword,
-      passwordChangeHistory: updatedHistory,
-    },
-  );
-
-  return result;
 };
+
+// const changePassword = async (
+//   userData: JwtPayload,
+//   payload: { currentPassword: string; newPassword: string },
+// ) => {
+//   const user = await User.isUserExistsByUsername(userData.username);
+
+//   if (!user) {
+//     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
+//   }
+
+//   if (!(await User.isPasswordMatched(payload.currentPassword, user.password)))
+//     throw new appError(httpStatus.FORBIDDEN, 'Password do not matched');
+
+//   // Check if the new password matches any of the last 2 passwords or the current one
+//   const passwordHistory = user.passwordChangeHistory || [];
+//   let isPasswordInHistory = false;
+
+//   for (const entry of passwordHistory) {
+//     if (await User.isPasswordMatched(payload.newPassword, entry.password)) {
+//       isPasswordInHistory = true;
+//       break;
+//     }
+//   }
+
+//   if (isPasswordInHistory) {
+//     throw new appError(
+//       httpStatus.FORBIDDEN,
+//       `Password change failed. Ensure the new password is unique and not among the last 2 used (last used on ${
+//         passwordHistory[0]?.timestamp || new Date()
+//       }).`,
+//     );
+//   }
+
+//   const newHashedPassword = await bcrypt.hash(
+//     payload.newPassword,
+//     Number(config.bcrypt_salt_rounds),
+//   );
+
+//   const updatedHistory = [
+//     { password: newHashedPassword, timestamp: new Date() },
+//     ...passwordHistory.slice(0, 2),
+//   ];
+
+//   const result = await User.findOneAndUpdate(
+//     {
+//       username: userData.username,
+//       role: userData.role,
+//     },
+//     {
+//       password: newHashedPassword,
+//       passwordChangeHistory: updatedHistory,
+//     },
+//   );
+
+//   return result;
+// };
 
 export const UserServices = {
-  registrationUser,
-  loginUser,
-  changePassword,
+  registrationCustomerIntoDb,
 };

@@ -5,7 +5,7 @@ const createUserValidation = z.object({
     firstName: z.string(),
     lastName: z.string(),
     username: z.string(),
-    mobileNumber: z.string(),
+    contactNo: z.string(),
     password: z.string(),
     email: z.string().email(),
     address: z.string().optional(),
