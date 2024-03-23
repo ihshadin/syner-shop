@@ -26,9 +26,11 @@ const customerSchema = new Schema<TCustomer, CustomerModel>(
     },
     address: {
       type: String,
+      required: true,
     },
     profileImg: {
       type: String,
+      default: '',
     },
     isDeleted: {
       type: Boolean,
