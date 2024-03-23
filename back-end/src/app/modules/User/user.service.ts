@@ -10,6 +10,8 @@ import { TCustomer } from '../Customer/customer.interface';
 import mongoose from 'mongoose';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 import { Customer } from '../Customer/customer.model';
+import { TAdmin } from '../Admin/admin.interface';
+import { Admin } from '../Admin/admin.model';
 
 const registrationCustomerIntoDb = async (
   password: string,
@@ -70,68 +72,109 @@ const registrationCustomerIntoDb = async (
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
-    // throw new Error('Failed to create student');
-    throw error;
+    throw new appError(
+      httpStatus.BAD_REQUEST,
+      'Failed to create user and customer',
+    );
+    // throw error;
   }
 };
 
-// const changePassword = async (
-//   userData: JwtPayload,
-//   payload: { currentPassword: string; newPassword: string },
-// ) => {
-//   const user = await User.isUserExistsByUsername(userData.username);
+const registrationAdminIntoDb = async (
+  password: string,
+  file: any,
+  payload: TAdmin,
+) => {
+  const user = await User.isUserExistsByEmail(payload.email);
 
-//   if (!user) {
-//     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
-//   }
+  if (user) {
+    throw new appError(httpStatus.FORBIDDEN, 'User Already Exists');
+  }
 
-//   if (!(await User.isPasswordMatched(payload.currentPassword, user.password)))
-//     throw new appError(httpStatus.FORBIDDEN, 'Password do not matched');
+  const userData: Partial<TUser> = {};
+  userData.email = payload.email;
+  userData.password = password;
+  userData.role = USER_ROLE.admin;
+  userData.passwordChangeHistory = [
+    {
+      password: await bcrypt.hash(password, Number(config.bcrypt_salt_rounds)),
+      timestamp: new Date(),
+    },
+  ];
 
-//   // Check if the new password matches any of the last 2 passwords or the current one
-//   const passwordHistory = user.passwordChangeHistory || [];
-//   let isPasswordInHistory = false;
+  const session = await mongoose.startSession();
 
-//   for (const entry of passwordHistory) {
-//     if (await User.isPasswordMatched(payload.newPassword, entry.password)) {
-//       isPasswordInHistory = true;
-//       break;
-//     }
-//   }
+  try {
+    session.startTransaction();
 
-//   if (isPasswordInHistory) {
-//     throw new appError(
-//       httpStatus.FORBIDDEN,
-//       `Password change failed. Ensure the new password is unique and not among the last 2 used (last used on ${
-//         passwordHistory[0]?.timestamp || new Date()
-//       }).`,
-//     );
-//   }
+    if (file) {
+      const imageName = `${payload.firstName}${payload.contactNo}`;
+      const path = file?.path;
 
-//   const newHashedPassword = await bcrypt.hash(
-//     payload.newPassword,
-//     Number(config.bcrypt_salt_rounds),
-//   );
+      const { secure_url } = await sendImageToCloudinary(imageName, path);
+      payload.profileImg = secure_url as string;
+    }
 
-//   const updatedHistory = [
-//     { password: newHashedPassword, timestamp: new Date() },
-//     ...passwordHistory.slice(0, 2),
-//   ];
+    //create a new user
+    const newUser = await User.create([userData], { session });
+    if (!newUser.length) {
+      throw new appError(httpStatus.BAD_REQUEST, 'Failed to create user');
+    }
 
-//   const result = await User.findOneAndUpdate(
-//     {
-//       username: userData.username,
-//       role: userData.role,
-//     },
-//     {
-//       password: newHashedPassword,
-//       passwordChangeHistory: updatedHistory,
-//     },
-//   );
+    // set email , _id as user
+    payload.email = newUser[0].email;
+    payload.user = newUser[0]._id;
 
-//   return result;
-// };
+    //create a new Admin
+    const newAdmin = await Admin.create([payload], { session });
 
-export const UserServices = {
+    if (!newAdmin.length) {
+      throw new appError(httpStatus.BAD_REQUEST, 'Failed to Create Admin');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+
+    return newAdmin;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw new appError(
+      httpStatus.BAD_REQUEST,
+      'Failed to create user and admin',
+    );
+    // throw error;
+  }
+};
+
+const getMe = async (id: string, role: string) => {
+  // const { userId, role } = decoded;
+
+  let result = null;
+  if (role === USER_ROLE.customer) {
+    result = await Customer.findById(id).populate('user');
+  }
+  if (role === USER_ROLE.admin) {
+    result = await Admin.findById(id).populate('user');
+  }
+
+  // if (role === 'faculty') {
+  //   result = await Faculty.findOne({ id: userId }).populate('user');
+  // }
+
+  return result;
+};
+
+const changeStatus = async (id: string, payload: { status: string }) => {
+  const result = await User.findByIdAndUpdate(id, payload, {
+    new: true,
+  });
+  return result;
+};
+
+export const userServices = {
   registrationCustomerIntoDb,
+  registrationAdminIntoDb,
+  getMe,
+  changeStatus,
 };
