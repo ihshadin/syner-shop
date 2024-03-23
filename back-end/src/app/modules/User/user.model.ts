@@ -1,24 +1,11 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 import { TUser, UserModel } from './user.interface';
-import { USER_ROLE } from './user.constant';
+import { USER_ROLE, UserStatus } from './user.constant';
 import config from '../../config';
 
 const userSchema = new Schema<TUser, UserModel>(
   {
-    username: {
-      type: 'String',
-      required: true,
-      unique: true,
-    },
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
     password: {
       type: 'String',
       required: true,
@@ -29,21 +16,15 @@ const userSchema = new Schema<TUser, UserModel>(
       required: true,
       unique: true,
     },
-    mobileNumber: {
-      type: 'String',
-      required: true,
-    },
     role: {
       type: 'String',
       enum: Object.values(USER_ROLE),
       default: USER_ROLE.customer,
     },
-    isBlocked: {
-      type: 'Boolean',
-      default: false,
-    },
-    address: {
+    status: {
       type: 'String',
+      enum: UserStatus,
+      default: 'active',
     },
     passwordChangeHistory: [
       {
@@ -54,6 +35,10 @@ const userSchema = new Schema<TUser, UserModel>(
     passwordChangedAt: {
       type: Date,
     },
+    isDeleted: {
+      type: 'Boolean',
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -63,7 +48,6 @@ const userSchema = new Schema<TUser, UserModel>(
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this; // doc
-  // hashing password and save into DB
 
   user.password = await bcrypt.hash(
     user.password,
@@ -97,8 +81,8 @@ userSchema.post('save', async function (doc, next) {
   next();
 });
 
-userSchema.statics.isUserExistsByCustomId = async function (username: string) {
-  return await User.findOne({ username }).select(
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email }).select(
     '+password passwordChangeHistory',
   );
 };

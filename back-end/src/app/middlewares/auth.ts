@@ -29,19 +29,26 @@ const auth = (...requiredRoles: TUserRole[]) => {
       // console.log('decodedError--=>', error);
     }
 
-    const { role, userId, iat } = decoded;
+    const { role, email, iat } = decoded;
 
     // checking if the user is exist
-    const user = await User.isUserExistsByCustomId(userId);
+    const user = await User.isUserExistsByEmail(email);
 
     if (!user) {
       throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
     }
 
-    // checking if the user is already deleted
-    const isBlocked = user?.isBlocked;
+    // checking if the user is status is blocked
+    const userStatus = user?.status;
 
-    if (isBlocked) {
+    if (userStatus === 'blocked') {
+      throw new appError(httpStatus.FORBIDDEN, 'This user is blocked !');
+    }
+
+    // checking if the user is already deleted
+    const isDeleted = user?.isDeleted;
+
+    if (isDeleted) {
       throw new appError(httpStatus.FORBIDDEN, 'This user is deleted !');
     }
 

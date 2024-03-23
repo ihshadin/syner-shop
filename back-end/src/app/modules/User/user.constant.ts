@@ -3,3 +3,5 @@ export const USER_ROLE = {
   customer: 'customer',
   superAdmin: 'superAdmin',
 } as const;
+
+export const UserStatus = ['active', 'blocked'];
