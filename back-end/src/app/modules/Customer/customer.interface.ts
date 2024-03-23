@@ -1,10 +1,8 @@
 import { Model, Types } from 'mongoose';
 
 export type TCustomer = {
-  username: string;
-  password: string;
-  user: Types.ObjectId;
   email: string;
+  user: Types.ObjectId;
   firstName: string;
   lastName: string;
   contactNo: string;

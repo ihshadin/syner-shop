@@ -3,11 +3,10 @@ import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export type TUser = {
-  username: string;
   password: string;
   email: string;
-  status: 'in-progress' | 'blocked';
-  role: 'admin' | 'customer';
+  status: 'active' | 'blocked';
+  role: 'admin' | 'customer' | 'superAdmin';
   passwordChangeHistory?: {
     password: string;
     timestamp: Date;
@@ -23,7 +22,7 @@ export type TLoginUser = {
 
 export interface UserModel extends Model<TUser> {
   //instance methods for checking if the user exist
-  isUserExistsByUsername(username: string): Promise<TUser>;
+  isUserExistsByEmail(email: string): Promise<TUser>;
 
   //instance methods for checking if passwords are matched
   isPasswordMatched(

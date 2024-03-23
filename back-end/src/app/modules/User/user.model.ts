@@ -6,11 +6,6 @@ import config from '../../config';
 
 const userSchema = new Schema<TUser, UserModel>(
   {
-    username: {
-      type: 'String',
-      required: true,
-      unique: true,
-    },
     password: {
       type: 'String',
       required: true,
@@ -29,7 +24,7 @@ const userSchema = new Schema<TUser, UserModel>(
     status: {
       type: 'String',
       enum: UserStatus,
-      default: 'in-progress',
+      default: 'active',
     },
     passwordChangeHistory: [
       {
@@ -86,8 +81,8 @@ userSchema.post('save', async function (doc, next) {
   next();
 });
 
-userSchema.statics.isUserExistsByUsername = async function (username: string) {
-  return await User.findOne({ username }).select(
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email }).select(
     '+password passwordChangeHistory',
   );
 };

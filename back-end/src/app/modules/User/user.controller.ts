@@ -5,8 +5,9 @@ import sendResponse from '../../utils/sendResponse';
 
 const registrationCustomer = catchAsync(async (req, res) => {
   const result = await UserServices.registrationCustomerIntoDb(
+    req.body.password,
     req.file,
-    req.body,
+    req.body.customer,
   );
 
   sendResponse(res, {

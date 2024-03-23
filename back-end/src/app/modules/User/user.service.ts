@@ -11,24 +11,24 @@ import mongoose from 'mongoose';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 import { Customer } from '../Customer/customer.model';
 
-const registrationCustomerIntoDb = async (file: any, payload: TCustomer) => {
-  const user = await User.isUserExistsByUsername(payload.username);
+const registrationCustomerIntoDb = async (
+  password: string,
+  file: any,
+  payload: TCustomer,
+) => {
+  const user = await User.isUserExistsByEmail(payload.email);
 
   if (user) {
     throw new appError(httpStatus.FORBIDDEN, 'User Already Exists');
   }
 
   const userData: Partial<TUser> = {};
-  userData.username = payload.username;
-  userData.password = payload.password;
   userData.email = payload.email;
+  userData.password = password;
   userData.role = USER_ROLE.customer;
   userData.passwordChangeHistory = [
     {
-      password: await bcrypt.hash(
-        payload.password,
-        Number(config.bcrypt_salt_rounds),
-      ),
+      password: await bcrypt.hash(password, Number(config.bcrypt_salt_rounds)),
       timestamp: new Date(),
     },
   ];
@@ -39,7 +39,7 @@ const registrationCustomerIntoDb = async (file: any, payload: TCustomer) => {
     session.startTransaction();
 
     if (file) {
-      const imageName = `${userData.username}`;
+      const imageName = `${payload.firstName}${payload.contactNo}`;
       const path = file?.path;
 
       const { secure_url } = await sendImageToCloudinary(imageName, path);
@@ -53,7 +53,7 @@ const registrationCustomerIntoDb = async (file: any, payload: TCustomer) => {
     }
 
     // set username , _id as user
-    payload.username = newUser[0].username;
+    payload.email = newUser[0].email;
     payload.user = newUser[0]._id;
 
     //create a new Customer

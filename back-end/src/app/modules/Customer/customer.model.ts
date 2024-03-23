@@ -3,14 +3,6 @@ import { CustomerModel, TCustomer } from './customer.interface';
 
 const customerSchema = new Schema<TCustomer, CustomerModel>(
   {
-    username: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

@@ -10,7 +10,7 @@ import { User } from '../User/user.model';
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
-  const user = await User.isUserExistsByUsername(payload.username);
+  const user = await User.isUserExistsByEmail(payload.email);
 
   if (!user) {
     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
@@ -29,7 +29,7 @@ const loginUser = async (payload: TLoginUser) => {
   const userStatus = user?.status;
 
   if (userStatus === 'blocked') {
-    throw new appError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+    throw new appError(httpStatus.FORBIDDEN, 'This user is blocked!');
   }
 
   //checking if the password is correct
@@ -41,7 +41,7 @@ const loginUser = async (payload: TLoginUser) => {
   //create token and sent to the  client
 
   const jwtPayload = {
-    userId: user.username,
+    email: user.email,
     role: user.role,
   };
 
@@ -68,7 +68,7 @@ const changePassword = async (
   payload: { oldPassword: string; newPassword: string },
 ) => {
   // checking if the user is exist
-  const user = await User.isUserExistsByUsername(userData.userId);
+  const user = await User.isUserExistsByEmail(userData.email);
 
   if (!user) {
     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
@@ -82,7 +82,6 @@ const changePassword = async (
   }
 
   // checking if the user is blocked
-
   const userStatus = user?.status;
 
   if (userStatus === 'blocked') {
@@ -90,9 +89,28 @@ const changePassword = async (
   }
 
   //checking if the password is correct
-
   if (!(await User.isPasswordMatched(payload.oldPassword, user?.password)))
     throw new appError(httpStatus.FORBIDDEN, 'Password do not matched');
+
+  // Check if the new password matches any of the last 2 passwords or the current one
+  const passwordHistory = user.passwordChangeHistory || [];
+  let isPasswordInHistory = false;
+
+  for (const entry of passwordHistory) {
+    if (await User.isPasswordMatched(payload.newPassword, entry.password)) {
+      isPasswordInHistory = true;
+      break;
+    }
+  }
+
+  if (isPasswordInHistory) {
+    throw new appError(
+      httpStatus.FORBIDDEN,
+      `Password change failed. Ensure the new password is unique and not among the last 2 used (last used on ${
+        passwordHistory[0]?.timestamp || new Date()
+      }).`,
+    );
+  }
 
   //hash new password
   const newHashedPassword = await bcrypt.hash(
@@ -100,14 +118,19 @@ const changePassword = async (
     Number(config.bcrypt_salt_rounds),
   );
 
+  const updatedHistory = [
+    { password: newHashedPassword, timestamp: new Date() },
+    ...passwordHistory.slice(0, 1),
+  ];
+
   await User.findOneAndUpdate(
     {
-      id: userData.userId,
+      email: userData.email,
       role: userData.role,
     },
     {
       password: newHashedPassword,
-      needsPasswordChange: false,
+      passwordChangeHistory: updatedHistory,
       passwordChangedAt: new Date(),
     },
   );
@@ -122,10 +145,10 @@ const refreshToken = async (token: string) => {
     config.jwt_refresh_token as string,
   ) as JwtPayload;
 
-  const { userId, iat } = decoded;
+  const { email, iat } = decoded;
 
   // checking if the user is exist
-  const user = await User.isUserExistsByUsername(userId);
+  const user = await User.isUserExistsByEmail(email);
 
   if (!user) {
     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
@@ -152,7 +175,7 @@ const refreshToken = async (token: string) => {
   }
 
   const jwtPayload = {
-    userId: user.username,
+    email: user.email,
     role: user.role,
   };
 
@@ -167,8 +190,8 @@ const refreshToken = async (token: string) => {
   };
 };
 
-const forgetPassword = async (userId: string) => {
-  const user = await User.isUserExistsByUsername(userId);
+const forgetPassword = async (email: string) => {
+  const user = await User.isUserExistsByEmail(email);
 
   if (!user) {
     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
@@ -186,7 +209,7 @@ const forgetPassword = async (userId: string) => {
   }
 
   const jwtPayload = {
-    userId: user.username,
+    email: user.email,
     role: user.role,
   };
 
@@ -196,7 +219,7 @@ const forgetPassword = async (userId: string) => {
     '10m',
   );
 
-  const resetUILink = `${config.reset_pass_ui_link}?username=${user.username}&token=${resetToken} `;
+  const resetUILink = `${config.reset_pass_ui_link}?email=${user.email}&token=${resetToken} `;
 
   sendEmail(user.email, resetUILink);
 
@@ -204,11 +227,11 @@ const forgetPassword = async (userId: string) => {
 };
 
 const resetPassword = async (
-  payload: { id: string; newPassword: string },
+  payload: { email: string; newPassword: string },
   token: string,
 ) => {
   // checking if the user is exist
-  const user = await User.isUserExistsByUsername(payload?.id);
+  const user = await User.isUserExistsByEmail(payload?.email);
 
   if (!user) {
     throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
@@ -232,7 +255,7 @@ const resetPassword = async (
     config.jwt_access_token as string,
   ) as JwtPayload;
 
-  if (payload.id !== decoded.userId) {
+  if (payload.email !== decoded.email) {
     throw new appError(httpStatus.FORBIDDEN, 'You are forbidden!');
   }
 
@@ -244,15 +267,17 @@ const resetPassword = async (
 
   await User.findOneAndUpdate(
     {
-      id: decoded.userId,
+      email: decoded.email,
       role: decoded.role,
     },
     {
       password: newHashedPassword,
-      needsPasswordChange: false,
+      passwordChangeHistory: [],
       passwordChangedAt: new Date(),
     },
   );
+
+  return null;
 };
 
 export const AuthServices = {
