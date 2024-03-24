@@ -219,7 +219,7 @@ const forgetPassword = async (email: string) => {
     '10m',
   );
 
-  const resetUILink = `${config.reset_pass_ui_link}?email=${user.email}&token=${resetToken} `;
+  const resetUILink = `Hi, Please follow this link to reset Your Password. This link is valid till 10 minutes from now. <a href='${config.reset_pass_ui_link}?email=${user.email}&token=${resetToken}'>Click Here</>`;
 
   sendEmail(user.email, resetUILink);
 
