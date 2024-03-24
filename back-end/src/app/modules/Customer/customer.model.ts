@@ -53,6 +53,22 @@ const customerSchema = new Schema<TCustomer, CustomerModel>(
   },
 );
 
+// filter out deleted documents
+customerSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+customerSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+customerSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
 export const Customer = model<TCustomer, CustomerModel>(
   'Customer',
   customerSchema,

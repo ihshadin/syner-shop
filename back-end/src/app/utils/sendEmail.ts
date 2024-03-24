@@ -13,11 +13,13 @@ export const sendEmail = async (to: string, html: string) => {
     },
   });
 
-  await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: 'jahidhasanprogramminghero7@gmail.com', // sender address
     to, // list of receivers
     subject: 'Reset your password within ten mins!', // Subject line
-    text: '', // plain text body
+    text: 'Hey User', // plain text body
     html, // html body
   });
+
+  console.log('Message sent: %s', info?.messageId);
 };
