@@ -4,8 +4,8 @@ import catchAsync from '../utils/catchAsync';
 import appError from '../errors/appError';
 import httpStatus from 'http-status';
 import config from '../config';
-import { User } from '../modules/user/user.model';
-import { TUserRole } from '../modules/user/user.interface';
+import { TUserRole } from '../modules/User/user.interface';
+import { User } from '../modules/User/user.model';
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -29,13 +29,20 @@ const auth = (...requiredRoles: TUserRole[]) => {
       // console.log('decodedError--=>', error);
     }
 
-    const { role, userId, iat } = decoded;
+    const { role, email, iat } = decoded;
 
     // checking if the user is exist
-    const user = await User.isUserExistsByCustomId(userId);
+    const user = await User.isUserExistsByEmail(email);
 
     if (!user) {
       throw new appError(httpStatus.NOT_FOUND, 'This user is not found !');
+    }
+
+    // checking if the user is status is blocked
+    const userStatus = user?.status;
+
+    if (userStatus === 'blocked') {
+      throw new appError(httpStatus.FORBIDDEN, 'This user is blocked !');
     }
 
     // checking if the user is already deleted
@@ -43,13 +50,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
     if (isDeleted) {
       throw new appError(httpStatus.FORBIDDEN, 'This user is deleted !');
-    }
-
-    // checking if the user is blocked
-    const userStatus = user?.status;
-
-    if (userStatus === 'blocked') {
-      throw new appError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
